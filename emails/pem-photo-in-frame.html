@@ -12,34 +12,100 @@
   </o:OfficeDocumentSettings>
 </xml>
 <![endif]-->
+<style type="text/css">
+  .pem-wrap { display: inline-block !important; position: relative !important; width: 224px !important; height: 167px !important; }
+  .pem-photo {
+    position: absolute !important;
+    left: 20px !important;
+    top: 2px !important;
+    display: block !important;
+    width: 184px !important;
+    height: 163px !important;
+    border: 0 !important;
+    border-radius: 78px !important;
+    object-fit: cover !important;
+    z-index: 1 !important;
+  }
+  .pem-ring {
+    position: absolute !important;
+    left: 18px !important;
+    top: 0 !important;
+    width: 188px !important;
+    height: 167px !important;
+    border: 3px solid #F5A623 !important;
+    border-radius: 82px !important;
+    box-sizing: border-box !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+  }
+  .pem-orb {
+    position: absolute !important;
+    border-radius: 50% !important;
+    z-index: 3 !important;
+    background: radial-gradient(circle at 32% 28%, #FFE08A 0%, #FF9A3C 42%, #E85A20 100%) !important;
+  }
+  .pem-orb-tl { width: 44px !important; height: 44px !important; left: 6px !important; top: -2px !important; }
+  .pem-orb-br { width: 52px !important; height: 52px !important; left: 168px !important; top: 115px !important; }
+  .pem-orb-sm { width: 18px !important; height: 18px !important; left: 120px !important; top: 142px !important; }
+</style>
 
-<!-- MAIN TABLE — background #EB7231 -->
+<!-- MAIN TABLE bg #EB7231 — image part only (no text) -->
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" bgcolor="#EB7231" style="width:640px; max-width:640px; margin:0 auto; border-collapse:collapse; background-color:#EB7231; mso-table-lspace:0pt; mso-table-rspace:0pt;">
   <tr>
     <td align="left" valign="top" bgcolor="#EB7231" style="padding:29px 36px 0 35px; background-color:#EB7231;">
 
-      <!-- PEM photo + static frame (224 x 167) -->
+      <!-- Photo + ring + 3 orbs | 224 x 167 -->
       <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167" style="width:224px; height:167px; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
         <tr>
           <td align="center" valign="middle" width="224" height="167" bgcolor="#EB7231" style="width:224px; height:167px; font-size:0; line-height:0; background-color:#EB7231;">
 
-            <!-- OUTLOOK -->
+            <!-- ========== OUTLOOK (Word engine) ========== -->
             <!--[if gte mso 9]>
             <v:group xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" coordsize="224,167" coordorigin="0,0" style="width:224px; height:167px;">
-              <v:roundrect style="position:absolute; left:20; top:2; width:184; height:163; z-index:1;" arcsize="4200f" stroked="false" filled="true">
-                <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#333333" />
+
+              <!-- Dynamic photo clipped to rounded shape -->
+              <v:roundrect style="position:absolute; left:20; top:2; width:184; height:163; z-index:1;" arcsize="4500f" stroked="false" filled="true">
+                <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#1a2b33" />
               </v:roundrect>
-              <v:rect style="position:absolute; left:0; top:0; width:224; height:167; z-index:2;" stroked="false" filled="true">
-                <v:fill type="frame" src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/eb3ad9ba-4b3d-4bbc-a5ad-c2fe989d9806.png" color="#EB7231" />
-              </v:rect>
+
+              <!-- Orange ring -->
+              <v:roundrect style="position:absolute; left:18; top:0; width:188; height:167; z-index:2;" arcsize="4500f" filled="false" strokecolor="#F5A623" strokeweight="3px">
+                <v:stroke color="#F5A623" weight="3px" />
+              </v:roundrect>
+
+              <!-- Orb top-left -->
+              <v:oval style="position:absolute; left:6; top:0; width:44; height:44; z-index:3;" stroked="false" filled="true">
+                <v:fill type="gradient" color="#E85A20" color2="#FFE08A" angle="135" />
+              </v:oval>
+
+              <!-- Orb bottom-right -->
+              <v:oval style="position:absolute; left:168; top:115; width:52; height:52; z-index:3;" stroked="false" filled="true">
+                <v:fill type="gradient" color="#E85A20" color2="#FFE08A" angle="135" />
+              </v:oval>
+
+              <!-- Orb small bottom -->
+              <v:oval style="position:absolute; left:120; top:142; width:18; height:18; z-index:3;" stroked="false" filled="true">
+                <v:fill type="gradient" color="#E85A20" color2="#FFE08A" angle="135" />
+              </v:oval>
+
             </v:group>
             <![endif]-->
 
-            <!-- GMAIL / APPLE / YAHOO / ANDROID -->
+            <!-- ========== GMAIL / APPLE / YAHOO / ANDROID ========== -->
             <!--[if !mso]><!-->
-            <div style="display:inline-block; position:relative; width:224px; height:167px;">
-              <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="position:absolute; left:20px; top:2px; display:block; width:184px; height:163px; border:0; border-radius:70px; object-fit:cover; z-index:1;" />
-              <img src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/eb3ad9ba-4b3d-4bbc-a5ad-c2fe989d9806.png" alt="" width="224" height="167" border="0" style="position:absolute; left:0; top:0; display:block; width:224px; height:167px; border:0; z-index:2;" />
+            <div class="pem-wrap" style="display:inline-block; position:relative; width:224px; height:167px;">
+
+              <!-- Dynamic PEM photo (visible inside rounded frame) -->
+              <img class="pem-photo" src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="position:absolute; left:20px; top:2px; display:block; width:184px; height:163px; border:0; border-radius:78px; object-fit:cover; z-index:1;" />
+
+              <!-- Orange ellipse ring -->
+              <div class="pem-ring" style="position:absolute; left:18px; top:0; width:188px; height:167px; border:3px solid #F5A623; border-radius:82px; box-sizing:border-box; z-index:2;"></div>
+
+              <!-- 3 orbs on top of photo -->
+              <div class="pem-orb pem-orb-tl" style="position:absolute; left:6px; top:-2px; width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 32% 28%, #FFE08A 0%, #FF9A3C 42%, #E85A20 100%); z-index:3;"></div>
+              <div class="pem-orb pem-orb-br" style="position:absolute; left:168px; top:115px; width:52px; height:52px; border-radius:50%; background:radial-gradient(circle at 32% 28%, #FFE08A 0%, #FF9A3C 42%, #E85A20 100%); z-index:3;"></div>
+              <div class="pem-orb pem-orb-sm" style="position:absolute; left:120px; top:142px; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 32% 28%, #FFE08A 0%, #FF9A3C 42%, #E85A20 100%); z-index:3;"></div>
+
             </div>
             <!--<![endif]-->
 
