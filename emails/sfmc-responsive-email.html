@@ -1,16 +1,24 @@
 %%[
-  /* Optional: set subject + preview in the email HTML or in the send definition */
+  /* SFMC AMPscript — set in email HTML or override in the send definition */
   SET @subject = "Your subject line here"
   SET @previewText = "Short preview text shown in the inbox"
+  SET @ctaUrl = "https://www.example.com"
+  SET @brandUrl = "https://www.example.com"
+  SET @firstName = ProperCase(AttributeValue("FirstName"))
+  IF Empty(@firstName) THEN
+    SET @firstName = "there"
+  ENDIF
 ]%%
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="x-apple-disable-message-reformatting">
-  <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no" />
+  <meta name="color-scheme" content="light only" />
+  <meta name="supported-color-schemes" content="light only" />
   <title>%%=v(@subject)=%%</title>
   <!--[if mso]>
   <noscript>
@@ -21,109 +29,104 @@
       </o:OfficeDocumentSettings>
     </xml>
   </noscript>
+  <style type="text/css">
+    table { border-collapse: collapse; }
+    td, th, div, p, a, h1, h2, h3, h4, h5, h6 { font-family: Arial, Helvetica, sans-serif !important; }
+    a { text-decoration: none; }
+  </style>
   <![endif]-->
   <style type="text/css">
-    /* Reset */
+    /* ===== Client resets (Gmail, Outlook.com, Yahoo, Apple Mail) ===== */
     body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
-    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse !important; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
     body { margin: 0 !important; padding: 0 !important; width: 100% !important; height: 100% !important; }
+    a[x-apple-data-detectors],
+    #MessageViewBody a { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+    u + #body a { color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit; }
+    #MessageViewBody #MessageWebViewDiv { width: 100% !important; min-width: 100vw !important; }
+    .ReadMsgBody, .ExternalClass { width: 100%; }
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }
 
-    /* Desktop defaults */
-    .email-container { width: 100%; max-width: 600px; }
-    .stack-column { display: inline-block; width: 100%; max-width: 290px; vertical-align: top; }
-    .stack-column-center { text-align: center !important; }
+    /* ===== Desktop defaults ===== */
+    .email-container { width: 100% !important; max-width: 600px !important; }
     .fluid { max-width: 100% !important; height: auto !important; }
-    .button-td { border-radius: 4px; background: #1a5f4a; }
+    .stack-column { display: inline-block !important; width: 100% !important; max-width: 284px !important; vertical-align: top !important; }
+    .button-td { background: #1a5f4a; }
     .button-a {
+      background: #1a5f4a;
+      border: 1px solid #1a5f4a;
       display: inline-block;
-      padding: 14px 28px;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 16px;
       font-weight: bold;
-      color: #ffffff !important;
+      line-height: 16px;
+      text-align: center;
       text-decoration: none;
-      border-radius: 4px;
-      background: #1a5f4a;
+      padding: 14px 28px;
+      color: #ffffff !important;
+      mso-padding-alt: 0;
     }
 
-    /* Mobile (max-width 600px) */
-    @media screen and (max-width: 600px) {
+    /* ===== Mobile ≤600px (iOS Mail, Gmail app, Android, Yahoo mobile) ===== */
+    @media only screen and (max-width: 600px) {
       .email-container { width: 100% !important; max-width: 100% !important; }
       .fluid { width: 100% !important; max-width: 100% !important; height: auto !important; }
-      .stack-column,
-      .stack-column-center {
+      .stack-column {
         display: block !important;
         width: 100% !important;
         max-width: 100% !important;
         direction: ltr !important;
       }
-      .stack-column-center { text-align: center !important; }
-      .center-on-narrow {
-        text-align: center !important;
-        display: block !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        float: none !important;
-      }
+      .center-on-mobile { text-align: center !important; }
       .mobile-padding { padding-left: 20px !important; padding-right: 20px !important; }
-      .mobile-padding-sm { padding-left: 16px !important; padding-right: 16px !important; }
+      .mobile-padding-sm { padding-left: 12px !important; padding-right: 12px !important; }
       .h1-mobile { font-size: 26px !important; line-height: 32px !important; }
       .h2-mobile { font-size: 20px !important; line-height: 26px !important; }
       .body-mobile { font-size: 16px !important; line-height: 24px !important; }
       .button-td,
       .button-a { width: 100% !important; text-align: center !important; }
-      .hide-on-mobile { display: none !important; max-height: 0 !important; overflow: hidden !important; }
+      .button-a { display: block !important; box-sizing: border-box !important; }
+      .hide-on-mobile { display: none !important; width: 0 !important; max-height: 0 !important; overflow: hidden !important; mso-hide: all !important; }
       .show-on-mobile {
         display: table-row !important;
         width: 100% !important;
         max-height: none !important;
         overflow: visible !important;
       }
-      .column-spacer { height: 20px !important; }
-    }
-
-    /* Dark mode friendly (optional clients) */
-    @media (prefers-color-scheme: dark) {
-      .email-bg { background-color: #111111 !important; }
-      .card-bg { background-color: #1e1e1e !important; }
-      .text-primary { color: #f2f2f2 !important; }
-      .text-secondary { color: #c8c8c8 !important; }
     }
   </style>
 </head>
-<body style="margin:0; padding:0; background-color:#f0f2f4; font-family:Arial, Helvetica, sans-serif;" class="email-bg">
-  <!-- SFMC: preview text -->
+<body id="body" style="margin:0; padding:0; background-color:#f0f2f4; width:100% !important;" bgcolor="#f0f2f4">
+  <!-- Preheader (hidden inbox preview) -->
   <div style="display:none; font-size:1px; color:#f0f2f4; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">
-    %%=v(@previewText)=%%
+    %%=v(@previewText)=%%&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
   </div>
 
-  <!-- Full-width wrapper -->
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#f0f2f4;" class="email-bg">
+  <!-- 100% background wrapper -->
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="#f0f2f4" style="margin:0; padding:0; width:100%; background-color:#f0f2f4; border-collapse:collapse;">
     <tr>
-      <td align="center" valign="top" style="padding:24px 12px;">
+      <td align="center" valign="top" style="padding:24px 10px;" bgcolor="#f0f2f4">
 
-        <!--[if mso]>
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center">
-        <tr>
-        <td>
+        <!--[if (gte mso 9)|(IE)]>
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center"><tr><td valign="top" width="600">
         <![endif]-->
 
-        <!-- Email container: 600px desktop / fluid mobile -->
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container card-bg" style="max-width:600px; margin:0 auto; background-color:#ffffff;">
+        <!-- 600px container: fluid on mobile -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" bgcolor="#ffffff" style="max-width:600px; width:100%; margin:0 auto; background-color:#ffffff; border-collapse:collapse;">
 
-          <!-- ========== HEADER (desktop + mobile) ========== -->
+          <!-- HEADER -->
           <tr>
-            <td align="center" style="padding:24px 32px 16px 32px; background-color:#ffffff;" class="mobile-padding card-bg">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <td align="center" bgcolor="#ffffff" style="padding:24px 32px 16px 32px; background-color:#ffffff;" class="mobile-padding">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
                 <tr>
-                  <td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif;">
-                    <!-- Replace with your hosted logo URL (SFMC Content Builder / Image Library) -->
-                    <a href="https://www.example.com" target="_blank" style="text-decoration:none;">
-                      <img src="https://via.placeholder.com/180x48/1a5f4a/ffffff?text=YOUR+BRAND" width="180" height="48" alt="Your Brand" style="width:180px; max-width:180px; height:auto;">
+                  <td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:20px; color:#1a2b33;">
+                    <!-- Host logo in SFMC Content Builder / Image Library -->
+                    <a href="%%=RedirectTo(@brandUrl)=%%" target="_blank" style="text-decoration:none; border:0;">
+                      <img src="https://via.placeholder.com/180x48/1a5f4a/ffffff?text=YOUR+BRAND" width="180" height="48" alt="Your Brand" border="0" style="display:block; width:180px; max-width:180px; height:auto; border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic;" />
                     </a>
                   </td>
-                  <td align="right" valign="middle" class="hide-on-mobile" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#5a6a75;">
+                  <td align="right" valign="middle" class="hide-on-mobile" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:18px; color:#5a6a75;">
                     <a href="%%view_email_url%%" target="_blank" style="color:#5a6a75; text-decoration:underline;">View in browser</a>
                   </td>
                 </tr>
@@ -131,67 +134,76 @@
             </td>
           </tr>
 
-          <!-- ========== HERO ========== -->
+          <!-- HERO -->
           <tr>
-            <td align="center" style="padding:0; background-color:#ffffff;" class="card-bg">
-              <a href="https://www.example.com" target="_blank">
-                <img src="https://via.placeholder.com/600x280/1a5f4a/ffffff?text=Hero+Image+600x280" width="600" alt="Hero" border="0" class="fluid" style="width:100%; max-width:600px; height:auto; display:block;">
+            <td align="center" bgcolor="#ffffff" style="padding:0; background-color:#ffffff; font-size:0; line-height:0;">
+              <a href="%%=RedirectTo(@ctaUrl)=%%" target="_blank" style="text-decoration:none; border:0;">
+                <img src="https://via.placeholder.com/600x280/1a5f4a/ffffff?text=Hero+Image+600x280" width="600" alt="Hero" border="0" class="fluid" style="display:block; width:100%; max-width:600px; height:auto; border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic;" />
               </a>
             </td>
           </tr>
 
-          <!-- ========== HEADLINE + BODY ========== -->
+          <!-- HEADLINE + BODY -->
           <tr>
-            <td align="left" style="padding:32px 32px 8px 32px; background-color:#ffffff;" class="mobile-padding card-bg">
-              <h1 class="h1-mobile text-primary" style="margin:0 0 12px 0; font-family:Georgia, 'Times New Roman', serif; font-size:30px; line-height:36px; font-weight:normal; color:#1a2b33;">
-                Hello %%=ProperCase(AttributeValue("FirstName"))=%%,
+            <td align="left" bgcolor="#ffffff" style="padding:32px 32px 8px 32px; background-color:#ffffff;" class="mobile-padding">
+              <h1 class="h1-mobile" style="margin:0 0 12px 0; font-family:Georgia, 'Times New Roman', Times, serif; font-size:30px; line-height:36px; font-weight:normal; color:#1a2b33; mso-line-height-rule:exactly;">
+                Hello %%=v(@firstName)=%%,
               </h1>
-              <p class="body-mobile text-secondary" style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; color:#3d4f5a;">
-                This is a Salesforce Marketing Cloud HTML email built with <strong>table / tr / td</strong> layout so it renders reliably on desktop and mobile clients.
+              <p class="body-mobile" style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; color:#3d4f5a; mso-line-height-rule:exactly;">
+                This Salesforce Marketing Cloud email uses nested <strong>table / tr / td</strong> layout with inline CSS so it renders in Outlook, Gmail, Apple Mail, Yahoo, and mobile clients.
               </p>
             </td>
           </tr>
 
-          <!-- ========== CTA BUTTON ========== -->
+          <!-- CTA — bulletproof (VML for Outlook desktop) -->
           <tr>
-            <td align="left" style="padding:20px 32px 32px 32px; background-color:#ffffff;" class="mobile-padding card-bg">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+            <td align="left" bgcolor="#ffffff" style="padding:20px 32px 32px 32px; background-color:#ffffff;" class="mobile-padding">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;">
                 <tr>
-                  <td class="button-td" style="border-radius:4px; background:#1a5f4a;">
-                    <a class="button-a" href="https://www.example.com" target="_blank" style="background:#1a5f4a; border:1px solid #1a5f4a; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:16px; text-decoration:none; padding:14px 28px; color:#ffffff; display:inline-block; border-radius:4px; font-weight:bold;">
+                  <td align="center" bgcolor="#1a5f4a" class="button-td" style="background-color:#1a5f4a; mso-padding-alt:14px 28px;">
+                    <!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="%%=RedirectTo(@ctaUrl)=%%" style="height:44px; v-text-anchor:middle; width:160px;" arcsize="9%" stroke="f" fillcolor="#1a5f4a">
+                      <w:anchorlock/>
+                      <center style="color:#ffffff; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold;">
+                        Shop now
+                      </center>
+                    </v:roundrect>
+                    <![endif]-->
+                    <!--[if !mso]><!-- -->
+                    <a class="button-a" href="%%=RedirectTo(@ctaUrl)=%%" target="_blank" style="background-color:#1a5f4a; border:1px solid #1a5f4a; display:inline-block; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; line-height:16px; text-align:center; text-decoration:none; padding:14px 28px; color:#ffffff !important; mso-hide:all;">
                       Shop now
                     </a>
+                    <!--<![endif]-->
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ========== TWO-COLUMN BLOCK (side-by-side desktop / stacked mobile) ========== -->
+          <!-- TWO COLUMNS: side-by-side desktop / stacked mobile (hybrid + MSO ghost table) -->
           <tr>
-            <td align="center" valign="top" style="padding:0 16px 24px 16px; background-color:#ffffff;" class="mobile-padding-sm card-bg">
-              <!--[if mso]>
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="568">
-              <tr>
+            <td align="center" valign="top" bgcolor="#ffffff" style="padding:0 16px 24px 16px; background-color:#ffffff;" class="mobile-padding-sm">
+              <!--[if (gte mso 9)|(IE)]>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="568" align="center"><tr>
               <td valign="top" width="284">
               <![endif]-->
               <div class="stack-column" style="display:inline-block; width:100%; max-width:284px; vertical-align:top;">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
                   <tr>
                     <td style="padding:8px;">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#f7f9fa;">
+                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="#f7f9fa" style="background-color:#f7f9fa; border-collapse:collapse;">
                         <tr>
-                          <td align="center" style="padding:0;">
-                            <img src="https://via.placeholder.com/268x160/2d7a62/ffffff?text=Product+1" width="268" alt="Product 1" border="0" class="fluid" style="width:100%; max-width:268px; height:auto; display:block;">
+                          <td align="center" style="padding:0; font-size:0; line-height:0;">
+                            <img src="https://via.placeholder.com/268x160/2d7a62/ffffff?text=Product+1" width="268" alt="Product 1" border="0" class="fluid" style="display:block; width:100%; max-width:268px; height:auto; border:0; -ms-interpolation-mode:bicubic;" />
                           </td>
                         </tr>
                         <tr>
-                          <td align="left" style="padding:16px;" class="stack-column-center">
-                            <h2 class="h2-mobile text-primary" style="margin:0 0 8px 0; font-family:Georgia, 'Times New Roman', serif; font-size:20px; line-height:26px; color:#1a2b33;">Feature one</h2>
-                            <p class="body-mobile text-secondary" style="margin:0 0 12px 0; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:21px; color:#3d4f5a;">
-                              Short supporting copy for the left column on desktop. Stacks full-width on mobile.
+                          <td align="left" style="padding:16px;" class="center-on-mobile">
+                            <h2 class="h2-mobile" style="margin:0 0 8px 0; font-family:Georgia, 'Times New Roman', Times, serif; font-size:20px; line-height:26px; font-weight:normal; color:#1a2b33; mso-line-height-rule:exactly;">Feature one</h2>
+                            <p class="body-mobile" style="margin:0 0 12px 0; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:21px; color:#3d4f5a; mso-line-height-rule:exactly;">
+                              Left column on desktop. Stacks full-width on mobile.
                             </p>
-                            <a href="https://www.example.com" target="_blank" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; color:#1a5f4a; text-decoration:underline;">Learn more</a>
+                            <a href="%%=RedirectTo(@ctaUrl)=%%" target="_blank" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; color:#1a5f4a; text-decoration:underline;">Learn more</a>
                           </td>
                         </tr>
                       </table>
@@ -199,27 +211,26 @@
                   </tr>
                 </table>
               </div>
-              <!--[if mso]>
-              </td>
-              <td valign="top" width="284">
+              <!--[if (gte mso 9)|(IE)]>
+              </td><td valign="top" width="284">
               <![endif]-->
               <div class="stack-column" style="display:inline-block; width:100%; max-width:284px; vertical-align:top;">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
                   <tr>
                     <td style="padding:8px;">
-                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#f7f9fa;">
+                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="#f7f9fa" style="background-color:#f7f9fa; border-collapse:collapse;">
                         <tr>
-                          <td align="center" style="padding:0;">
-                            <img src="https://via.placeholder.com/268x160/1a5f4a/ffffff?text=Product+2" width="268" alt="Product 2" border="0" class="fluid" style="width:100%; max-width:268px; height:auto; display:block;">
+                          <td align="center" style="padding:0; font-size:0; line-height:0;">
+                            <img src="https://via.placeholder.com/268x160/1a5f4a/ffffff?text=Product+2" width="268" alt="Product 2" border="0" class="fluid" style="display:block; width:100%; max-width:268px; height:auto; border:0; -ms-interpolation-mode:bicubic;" />
                           </td>
                         </tr>
                         <tr>
-                          <td align="left" style="padding:16px;" class="stack-column-center">
-                            <h2 class="h2-mobile text-primary" style="margin:0 0 8px 0; font-family:Georgia, 'Times New Roman', serif; font-size:20px; line-height:26px; color:#1a2b33;">Feature two</h2>
-                            <p class="body-mobile text-secondary" style="margin:0 0 12px 0; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:21px; color:#3d4f5a;">
-                              Short supporting copy for the right column on desktop. Stacks under Feature one on mobile.
+                          <td align="left" style="padding:16px;" class="center-on-mobile">
+                            <h2 class="h2-mobile" style="margin:0 0 8px 0; font-family:Georgia, 'Times New Roman', Times, serif; font-size:20px; line-height:26px; font-weight:normal; color:#1a2b33; mso-line-height-rule:exactly;">Feature two</h2>
+                            <p class="body-mobile" style="margin:0 0 12px 0; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:21px; color:#3d4f5a; mso-line-height-rule:exactly;">
+                              Right column on desktop. Stacks under Feature one on mobile.
                             </p>
-                            <a href="https://www.example.com" target="_blank" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; color:#1a5f4a; text-decoration:underline;">Learn more</a>
+                            <a href="%%=RedirectTo(@ctaUrl)=%%" target="_blank" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; color:#1a5f4a; text-decoration:underline;">Learn more</a>
                           </td>
                         </tr>
                       </table>
@@ -227,18 +238,16 @@
                   </tr>
                 </table>
               </div>
-              <!--[if mso]>
-              </td>
-              </tr>
-              </table>
+              <!--[if (gte mso 9)|(IE)]>
+              </td></tr></table>
               <![endif]-->
             </td>
           </tr>
 
-          <!-- ========== MOBILE-ONLY ROW (hidden on desktop) ========== -->
+          <!-- MOBILE-ONLY: view in browser (hidden in Outlook desktop via mso + CSS) -->
           <!--[if !mso]><!-->
-          <tr class="show-on-mobile" style="display:none; max-height:0; overflow:hidden;">
-            <td align="center" style="padding:0 20px 24px 20px; background-color:#ffffff;" class="card-bg">
+          <tr class="show-on-mobile" style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
+            <td align="center" bgcolor="#ffffff" style="padding:0 20px 24px 20px; background-color:#ffffff;">
               <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:18px; color:#5a6a75;">
                 <a href="%%view_email_url%%" target="_blank" style="color:#5a6a75; text-decoration:underline;">View in browser</a>
               </p>
@@ -246,31 +255,31 @@
           </tr>
           <!--<![endif]-->
 
-          <!-- ========== DIVIDER ========== -->
+          <!-- DIVIDER -->
           <tr>
-            <td style="padding:0 32px; background-color:#ffffff;" class="mobile-padding card-bg">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <td bgcolor="#ffffff" style="padding:0 32px; background-color:#ffffff;" class="mobile-padding">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
                 <tr>
-                  <td style="border-top:1px solid #e2e6e9; font-size:0; line-height:0;">&nbsp;</td>
+                  <td style="border-top:1px solid #e2e6e9; font-size:0; line-height:0; height:1px;" height="1">&nbsp;</td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ========== FOOTER ========== -->
+          <!-- FOOTER (SFMC required / recommended tokens) -->
           <tr>
-            <td align="center" style="padding:24px 32px 32px 32px; background-color:#ffffff;" class="mobile-padding card-bg">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <td align="center" bgcolor="#ffffff" style="padding:24px 32px 32px 32px; background-color:#ffffff;" class="mobile-padding">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
                 <tr>
-                  <td align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:18px; color:#5a6a75;" class="text-secondary">
+                  <td align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:18px; color:#5a6a75; mso-line-height-rule:exactly;">
                     <p style="margin:0 0 8px 0;">
-                      %%Member_Busname%%<br>
-                      %%Member_Addr%% · %%Member_City%%, %%Member_State%% %%Member_PostalCode%% · %%Member_Country%%
+                      %%Member_Busname%%<br />
+                      %%Member_Addr%%&nbsp;&middot;&nbsp;%%Member_City%%,&nbsp;%%Member_State%%&nbsp;%%Member_PostalCode%%&nbsp;&middot;&nbsp;%%Member_Country%%
                     </p>
                     <p style="margin:0 0 8px 0;">
-                      <a href="%%profile_center_url%%" target="_blank" style="color:#5a6a75; text-decoration:underline;">Update preferences</a>
+                      <a href="%%profile_center_url%%" target="_blank" alias="Update preferences" style="color:#5a6a75; text-decoration:underline;">Update preferences</a>
                       &nbsp;|&nbsp;
-                      <a href="%%unsub_center_url%%" target="_blank" style="color:#5a6a75; text-decoration:underline;">Unsubscribe</a>
+                      <a href="%%unsub_center_url%%" target="_blank" alias="Unsubscribe" style="color:#5a6a75; text-decoration:underline;">Unsubscribe</a>
                     </p>
                     <p style="margin:0;">
                       This email was sent to %%=v(emailaddr)=%%
@@ -282,12 +291,10 @@
           </tr>
 
         </table>
-        <!-- End email container -->
+        <!-- /email container -->
 
-        <!--[if mso]>
-        </td>
-        </tr>
-        </table>
+        <!--[if (gte mso 9)|(IE)]>
+        </td></tr></table>
         <![endif]-->
 
       </td>

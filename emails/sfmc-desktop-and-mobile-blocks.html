@@ -1,11 +1,20 @@
-<!DOCTYPE html>
+%%[
+  SET @subject = "Desktop + Mobile table blocks"
+  SET @previewText = "Separate desktop and mobile tr/td blocks for SFMC"
+  SET @ctaUrl = "https://www.example.com"
+  SET @brandUrl = "https://www.example.com"
+]%%
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="x-apple-disable-message-reformatting">
-  <title>Desktop + Mobile Table Blocks — SFMC</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no" />
+  <meta name="color-scheme" content="light only" />
+  <meta name="supported-color-schemes" content="light only" />
+  <title>%%=v(@subject)=%%</title>
   <!--[if mso]>
   <noscript>
     <xml>
@@ -15,25 +24,34 @@
       </o:OfficeDocumentSettings>
     </xml>
   </noscript>
+  <style type="text/css">
+    table { border-collapse: collapse; }
+    td, th, div, p, a, h1, h2, h3 { font-family: Arial, Helvetica, sans-serif !important; }
+  </style>
   <![endif]-->
   <style type="text/css">
     body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse !important; }
     img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; }
     body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+    a[x-apple-data-detectors],
+    #MessageViewBody a { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+    .ReadMsgBody, .ExternalClass { width: 100%; }
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }
 
-    /* Desktop: show desktop rows, hide mobile rows */
+    /* Desktop shows desktop rows; mobile rows stay hidden */
     .desktop-only { display: table-row !important; }
-    .mobile-only { display: none !important; max-height: 0 !important; overflow: hidden !important; mso-hide: all; }
+    .mobile-only { display: none !important; max-height: 0 !important; overflow: hidden !important; mso-hide: all !important; }
 
-    @media screen and (max-width: 600px) {
+    @media only screen and (max-width: 600px) {
       .email-container { width: 100% !important; max-width: 100% !important; }
       .fluid { width: 100% !important; max-width: 100% !important; height: auto !important; }
-      .desktop-only { display: none !important; max-height: 0 !important; overflow: hidden !important; }
+      .desktop-only { display: none !important; width: 0 !important; max-height: 0 !important; overflow: hidden !important; mso-hide: all !important; }
       .mobile-only {
         display: table-row !important;
         max-height: none !important;
         overflow: visible !important;
+        width: 100% !important;
       }
       .mobile-padding { padding-left: 20px !important; padding-right: 20px !important; }
       .h1-mobile { font-size: 26px !important; line-height: 32px !important; }
@@ -42,49 +60,60 @@
     }
   </style>
 </head>
-<body style="margin:0; padding:0; background-color:#f0f2f4; font-family:Arial, Helvetica, sans-serif;">
+<body id="body" style="margin:0; padding:0; background-color:#f0f2f4; width:100% !important;" bgcolor="#f0f2f4">
   <div style="display:none; font-size:1px; color:#f0f2f4; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">
-    Example of separate desktop and mobile &lt;tr&gt; blocks for SFMC.
+    %%=v(@previewText)=%%&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
   </div>
 
-  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#f0f2f4;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="#f0f2f4" style="margin:0; padding:0; width:100%; background-color:#f0f2f4; border-collapse:collapse;">
     <tr>
-      <td align="center" valign="top" style="padding:24px 12px;">
+      <td align="center" valign="top" style="padding:24px 10px;" bgcolor="#f0f2f4">
 
-        <!--[if mso]>
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center"><tr><td>
+        <!--[if (gte mso 9)|(IE)]>
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center"><tr><td valign="top" width="600">
         <![endif]-->
 
-        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width:600px; margin:0 auto; background-color:#ffffff;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" bgcolor="#ffffff" style="max-width:600px; width:100%; margin:0 auto; background-color:#ffffff; border-collapse:collapse;">
 
-          <!-- Shared header (both viewports) -->
+          <!-- Shared header -->
           <tr>
-            <td align="center" style="padding:24px 32px; background-color:#ffffff;" class="mobile-padding">
-              <img src="https://via.placeholder.com/180x48/1a5f4a/ffffff?text=YOUR+BRAND" width="180" height="48" alt="Your Brand" style="width:180px; max-width:180px; height:auto;">
+            <td align="center" bgcolor="#ffffff" style="padding:24px 32px; background-color:#ffffff;" class="mobile-padding">
+              <a href="%%=RedirectTo(@brandUrl)=%%" target="_blank" style="text-decoration:none; border:0;">
+                <img src="https://via.placeholder.com/180x48/1a5f4a/ffffff?text=YOUR+BRAND" width="180" height="48" alt="Your Brand" border="0" style="display:block; width:180px; max-width:180px; height:auto; border:0; -ms-interpolation-mode:bicubic;" />
+              </a>
             </td>
           </tr>
 
-          <!-- ========== DESKTOP VERSION (hidden on mobile) ========== -->
+          <!-- ========== DESKTOP VERSION (Outlook + wide screens) ========== -->
           <tr class="desktop-only">
-            <td align="left" style="padding:8px 32px 32px 32px; background-color:#ffffff;">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <td align="left" bgcolor="#ffffff" style="padding:8px 32px 32px 32px; background-color:#ffffff;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
                 <tr>
-                  <td width="280" valign="top" style="padding-right:16px;">
-                    <img src="https://via.placeholder.com/280x200/1a5f4a/ffffff?text=Desktop+Image" width="280" alt="Desktop" border="0" style="width:280px; max-width:280px; height:auto; display:block;">
+                  <td width="280" valign="top" style="padding-right:16px; width:280px;">
+                    <img src="https://via.placeholder.com/280x200/1a5f4a/ffffff?text=Desktop+Image" width="280" alt="Desktop" border="0" style="display:block; width:280px; max-width:280px; height:auto; border:0; -ms-interpolation-mode:bicubic;" />
                   </td>
-                  <td width="256" valign="middle" style="padding-left:8px;">
-                    <h1 style="margin:0 0 12px 0; font-family:Georgia, 'Times New Roman', serif; font-size:28px; line-height:34px; color:#1a2b33;">
+                  <td width="256" valign="middle" style="padding-left:8px; width:256px;">
+                    <h1 style="margin:0 0 12px 0; font-family:Georgia, 'Times New Roman', Times, serif; font-size:28px; line-height:34px; font-weight:normal; color:#1a2b33; mso-line-height-rule:exactly;">
                       Desktop layout
                     </h1>
-                    <p style="margin:0 0 16px 0; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; color:#3d4f5a;">
+                    <p style="margin:0 0 16px 0; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; color:#3d4f5a; mso-line-height-rule:exactly;">
                       This entire <strong>&lt;tr&gt;</strong> is the desktop version: image and copy sit in side-by-side <strong>&lt;td&gt;</strong> cells.
                     </p>
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                    <!-- Bulletproof CTA for Outlook -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;">
                       <tr>
-                        <td style="border-radius:4px; background:#1a5f4a;">
-                          <a href="https://www.example.com" target="_blank" style="background:#1a5f4a; border:1px solid #1a5f4a; font-family:Arial, Helvetica, sans-serif; font-size:15px; text-decoration:none; padding:12px 24px; color:#ffffff; display:inline-block; border-radius:4px; font-weight:bold;">
+                        <td align="center" bgcolor="#1a5f4a" style="background-color:#1a5f4a; mso-padding-alt:12px 24px;">
+                          <!--[if mso]>
+                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="%%=RedirectTo(@ctaUrl)=%%" style="height:40px; v-text-anchor:middle; width:140px;" arcsize="10%" stroke="f" fillcolor="#1a5f4a">
+                            <w:anchorlock/>
+                            <center style="color:#ffffff; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold;">Desktop CTA</center>
+                          </v:roundrect>
+                          <![endif]-->
+                          <!--[if !mso]><!-- -->
+                          <a href="%%=RedirectTo(@ctaUrl)=%%" target="_blank" style="background-color:#1a5f4a; border:1px solid #1a5f4a; display:inline-block; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; text-decoration:none; padding:12px 24px; color:#ffffff !important; mso-hide:all;">
                             Desktop CTA
                           </a>
+                          <!--<![endif]-->
                         </td>
                       </tr>
                     </table>
@@ -94,28 +123,28 @@
             </td>
           </tr>
 
-          <!-- ========== MOBILE VERSION (hidden on desktop) ========== -->
+          <!-- ========== MOBILE VERSION (hidden in Outlook desktop via mso wrap) ========== -->
           <!--[if !mso]><!-->
-          <tr class="mobile-only" style="display:none; max-height:0; overflow:hidden;">
-            <td align="left" style="padding:8px 20px 28px 20px; background-color:#ffffff;" class="mobile-padding">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+          <tr class="mobile-only" style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
+            <td align="left" bgcolor="#ffffff" style="padding:8px 20px 28px 20px; background-color:#ffffff;" class="mobile-padding">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
                 <tr>
-                  <td align="center" style="padding:0 0 16px 0;">
-                    <img src="https://via.placeholder.com/560x280/2d7a62/ffffff?text=Mobile+Image" width="560" alt="Mobile" border="0" class="fluid" style="width:100%; max-width:560px; height:auto; display:block;">
+                  <td align="center" style="padding:0 0 16px 0; font-size:0; line-height:0;">
+                    <img src="https://via.placeholder.com/560x280/2d7a62/ffffff?text=Mobile+Image" width="560" alt="Mobile" border="0" class="fluid" style="display:block; width:100%; max-width:560px; height:auto; border:0; -ms-interpolation-mode:bicubic;" />
                   </td>
                 </tr>
                 <tr>
                   <td align="left">
-                    <h1 class="h1-mobile" style="margin:0 0 12px 0; font-family:Georgia, 'Times New Roman', serif; font-size:26px; line-height:32px; color:#1a2b33;">
+                    <h1 class="h1-mobile" style="margin:0 0 12px 0; font-family:Georgia, 'Times New Roman', Times, serif; font-size:26px; line-height:32px; font-weight:normal; color:#1a2b33; mso-line-height-rule:exactly;">
                       Mobile layout
                     </h1>
-                    <p class="body-mobile" style="margin:0 0 16px 0; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; color:#3d4f5a;">
-                      This entire <strong>&lt;tr&gt;</strong> is the mobile version: one stacked column of <strong>&lt;td&gt;</strong> cells (image, then copy, then button).
+                    <p class="body-mobile" style="margin:0 0 16px 0; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; color:#3d4f5a; mso-line-height-rule:exactly;">
+                      This entire <strong>&lt;tr&gt;</strong> is the mobile version: stacked <strong>&lt;td&gt;</strong> cells (image, copy, button).
                     </p>
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
                       <tr>
-                        <td style="border-radius:4px; background:#1a5f4a;" align="center">
-                          <a class="button-a" href="https://www.example.com" target="_blank" style="background:#1a5f4a; border:1px solid #1a5f4a; font-family:Arial, Helvetica, sans-serif; font-size:16px; text-decoration:none; padding:14px 24px; color:#ffffff; display:block; border-radius:4px; font-weight:bold; text-align:center;">
+                        <td align="center" bgcolor="#1a5f4a" style="background-color:#1a5f4a;">
+                          <a class="button-a" href="%%=RedirectTo(@ctaUrl)=%%" target="_blank" style="background-color:#1a5f4a; border:1px solid #1a5f4a; display:block; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; text-decoration:none; padding:14px 24px; color:#ffffff !important; text-align:center;">
                             Mobile CTA
                           </a>
                         </td>
@@ -130,19 +159,19 @@
 
           <!-- Shared footer -->
           <tr>
-            <td align="center" style="padding:20px 32px 28px 32px; border-top:1px solid #e2e6e9; background-color:#ffffff;" class="mobile-padding">
-              <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:18px; color:#5a6a75;">
-                %%Member_Busname%% · %%Member_Addr%% · %%Member_City%%, %%Member_State%% %%Member_PostalCode%%<br>
-                <a href="%%profile_center_url%%" style="color:#5a6a75;">Update preferences</a>
+            <td align="center" bgcolor="#ffffff" style="padding:20px 32px 28px 32px; border-top:1px solid #e2e6e9; background-color:#ffffff;" class="mobile-padding">
+              <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:18px; color:#5a6a75; mso-line-height-rule:exactly;">
+                %%Member_Busname%%&nbsp;&middot;&nbsp;%%Member_Addr%%&nbsp;&middot;&nbsp;%%Member_City%%,&nbsp;%%Member_State%%&nbsp;%%Member_PostalCode%%<br />
+                <a href="%%profile_center_url%%" target="_blank" alias="Update preferences" style="color:#5a6a75; text-decoration:underline;">Update preferences</a>
                 &nbsp;|&nbsp;
-                <a href="%%unsub_center_url%%" style="color:#5a6a75;">Unsubscribe</a>
+                <a href="%%unsub_center_url%%" target="_blank" alias="Unsubscribe" style="color:#5a6a75; text-decoration:underline;">Unsubscribe</a>
               </p>
             </td>
           </tr>
 
         </table>
 
-        <!--[if mso]>
+        <!--[if (gte mso 9)|(IE)]>
         </td></tr></table>
         <![endif]-->
 

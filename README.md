@@ -1,52 +1,60 @@
-# Salesforce Marketing Cloud — Responsive HTML Email
+# Salesforce Marketing Cloud — Cross-Client HTML Email
 
-HTML/CSS email template for **Salesforce Marketing Cloud (SFMC)** Content Builder, built with nested `<table>`, `<tr>`, and `<td>` layout for reliable desktop and mobile rendering.
+Table-based (`<table>` / `<tr>` / `<td>`) HTML emails optimized for **SFMC**, **Outlook (Windows desktop + Office 365)**, and major clients: Gmail, Apple Mail, Yahoo, iOS, Android.
+
+> **Workflow:** Send prompts with your content, layout, or brand rules. Code will be corrected and optimized for SFMC + Outlook + all target email versions from those prompts.
 
 ## Files
 
-| File | Purpose |
-|------|---------|
-| `emails/sfmc-responsive-email.html` | Main responsive template (600px desktop, fluid mobile) |
-| `emails/sfmc-desktop-and-mobile-blocks.html` | Optional pattern with separate desktop-only / mobile-only table blocks |
+| File | Use when |
+|------|----------|
+| `emails/sfmc-responsive-email.html` | **Default** — one hybrid layout that adapts (600px desktop, stacked mobile) |
+| `emails/sfmc-desktop-and-mobile-blocks.html` | You need **different** desktop vs mobile content/images in separate `<tr>` blocks |
 
-## How it works
+## Compatibility built in
 
-- **Desktop (≥601px):** Content sits in a centered 600px table. Two-column product blocks sit side by side.
-- **Mobile (≤600px):** CSS `@media` rules make columns stack (`display:block` / `width:100%`), enlarge type, and stretch the CTA to full width.
-- **Outlook:** Conditional `<!--[if mso]>` tables lock the 600px width and column split.
-- **SFMC tokens:** Includes personalization and compliance links (`%%unsub_center_url%%`, `%%profile_center_url%%`, member address, etc.).
+| Client / platform | Technique used |
+|-------------------|----------------|
+| Outlook 2016–2021 / Microsoft 365 (Windows) | `<!--[if mso]>` / `<!--[if (gte mso 9)\|(IE)]>` ghost tables, fixed 600px width, VML bulletproof buttons, `bgcolor` + inline styles, `mso-line-height-rule` |
+| Outlook.com / Outlook Mac | Standard table + inline CSS (Word engine not used) |
+| Gmail (web + app) | Inline styles, fluid images, media queries where supported |
+| Apple Mail / iOS Mail | Media queries, fluid layout, data-detector reset |
+| Yahoo Mail | Table layout + inline CSS |
+| Android / Gmail app | Full-width stacked columns ≤600px |
+
+## SFMC-specific pieces
+
+- AMPscript block for subject, preview, URLs, safe `FirstName`
+- `%%=RedirectTo(@url)=%%` for tracked links
+- `%%view_email_url%%`, `%%profile_center_url%%`, `%%unsub_center_url%%`
+- Physical address: `%%Member_Busname%%`, `%%Member_Addr%%`, city/state/postal/country
+- `alias=` on key links for tracking reports
 
 ## Import into Marketing Cloud
 
-1. Open **Content Builder** → **Create** → **Email Message** → **HTML Paste** (or Code Paste).
-2. Paste the contents of `sfmc-responsive-email.html`.
-3. Replace placeholder images with assets from your SFMC **Image Library** (or CDN URLs).
-4. Update links, brand colors, and copy.
-5. Optional AMPscript at the top of the HTML:
+1. **Content Builder → Create → Email Message → HTML Paste** (or Code Paste).
+2. Paste `sfmc-responsive-email.html` (or the desktop/mobile blocks file).
+3. Replace placeholder images with **Content Builder / Image Library** URLs.
+4. Update AMPscript `@subject`, `@previewText`, `@ctaUrl`, copy, and colors.
+5. Set email Subject to `%%=v(@subject)=%%` (or type it in the send UI).
+6. **Preview & Test** → Desktop + Mobile, then Inbox Preview / test sends to Outlook, Gmail, Apple Mail.
 
-```html
-%%[
-  SET @subject = "Your subject line"
-  SET @previewText = "Short preview text shown in the inbox"
-]%%
-```
+## Coding rules we follow on each prompt
 
-6. Set the email **Subject** to `%%=v(@subject)=%%` (or type it directly).
-7. **Preview & Test** → Desktop and Mobile panes, then send a test to Gmail / Outlook / Apple Mail.
-
-## Desktop vs mobile tips for SFMC
-
-- Keep the outer content width at **600px** for desktop.
-- Use `class="fluid"` + `style="width:100%; max-width:…"` on images so they scale on phones.
-- For columns, use the **hybrid** pattern in the template (`inline-block` + `max-width` + media query) so clients without media-query support still get a usable layout.
-- Prefer **inline styles** for critical look; keep `@media` rules in `<style>` for mobile overrides.
-- Always include CAN-SPAM / SFMC system links: unsubscribe, profile center, and physical address (`%%Member_*%%`).
+1. Layout = nested tables with `tr`/`td` (no CSS Grid/Flex for structure).
+2. Critical look = **inline CSS**; mobile tweaks in `<style>` `@media only screen and (max-width: 600px)`.
+3. Outlook = MSO conditionals + VML buttons + `bgcolor` attributes.
+4. Images = explicit `width`, `border="0"`, `display:block`, `max-width` + `.fluid` for mobile.
+5. Fonts = web-safe stacks (Arial / Georgia) for Outlook parity.
+6. Links = `RedirectTo()` for SFMC click tracking.
+7. Always keep unsubscribe + physical address for compliance.
 
 ## Customization checklist
 
-- [ ] Logo and hero image URLs
-- [ ] Brand hex colors (currently `#1a5f4a`)
-- [ ] Headline, body, CTA label and URL
-- [ ] Two-column feature images and copy
-- [ ] Data Extension attributes (`FirstName`, etc.)
-- [ ] Subject / preview text AMPscript
+- [ ] Logo and hero image URLs (SFMC-hosted)
+- [ ] Brand hex colors (default `#1a5f4a`)
+- [ ] Headline, body, CTA label
+- [ ] `@ctaUrl` / `@brandUrl` in AMPscript
+- [ ] Data Extension attributes
+- [ ] Subject / preview text
+- [ ] Test: Outlook Windows, Gmail, iPhone Mail
