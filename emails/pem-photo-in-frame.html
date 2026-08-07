@@ -1,0 +1,67 @@
+%%[
+  /* Dynamic PEM photo from Data Extension */
+  SET @PEM_Photo = AttributeValue("PEM_Photo")
+  /* After upload to SFMC Image Library, set full hosted URL: */
+  SET @PEM_Frame = "FRAME_URL"
+]%%
+<!--
+  Image 1 (frame template): 224 x 167  → @PEM_Frame (static)
+  Image 2 (doctor photo):   184 x 163  → %%=v(@PEM_Photo)=%% (dynamic)
+  Centered: left 20px, top 2px   |  Works Outlook + Gmail + Apple Mail
+-->
+<!--[if mso]>
+<style type="text/css">
+  table { border-collapse: collapse; }
+</style>
+<![endif]-->
+
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167" style="width:224px; height:167px; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+  <tr>
+    <td align="center" valign="middle" width="224" height="167" style="width:224px; height:167px; font-size:0; line-height:0;">
+
+      <!-- ===================== OUTLOOK (Windows) ===================== -->
+      <!--[if gte mso 9]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167" style="width:224px; height:167px; border-collapse:collapse;">
+        <tr>
+          <td width="224" height="167" valign="middle" align="center" style="width:224px; height:167px; font-size:0; line-height:0;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167" style="width:224px; height:167px; border-collapse:collapse;">
+              <tr>
+                <td width="20" height="167" style="width:20px; height:167px; font-size:0; line-height:0;">&nbsp;</td>
+                <td width="184" height="167" valign="middle" align="center" style="width:184px; height:167px; font-size:0; line-height:0;">
+                  <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="display:block; width:184px; height:163px; border:0;" />
+                </td>
+                <td width="20" height="167" style="width:20px; height:167px; font-size:0; line-height:0;">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td width="224" height="0" style="font-size:0; line-height:0; height:0;">
+            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" stroked="false" filled="true" style="position:absolute; top:0; left:0; width:224px; height:167px; z-index:2;">
+              <v:fill type="frame" src="%%=v(@PEM_Frame)=%%" color="#EB7231" />
+              <v:textbox inset="0,0,0,0"><div style="font-size:0; line-height:0;">&nbsp;</div></v:textbox>
+            </v:rect>
+          </td>
+        </tr>
+      </table>
+      <![endif]-->
+
+      <!-- ===================== GMAIL / APPLE / OTHERS ===================== -->
+      <!--[if !mso]><!-->
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167" style="width:224px; height:167px; border-collapse:collapse;">
+        <tr>
+          <td align="center" valign="middle" width="224" height="167" style="width:224px; height:167px; font-size:0; line-height:0;">
+            <div style="display:inline-block; position:relative; width:224px; height:167px;">
+              <!-- Dynamic doctor image from DE -->
+              <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="position:absolute; left:20px; top:2px; display:block; width:184px; height:163px; border:0; border-radius:70px; object-fit:cover; z-index:1;" />
+              <!-- Static ellipse frame (image 1) on top -->
+              <img src="%%=v(@PEM_Frame)=%%" alt="" width="224" height="167" border="0" style="position:absolute; left:0; top:0; display:block; width:224px; height:167px; border:0; z-index:2;" />
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!--<![endif]-->
+
+    </td>
+  </tr>
+</table>
