@@ -14,12 +14,9 @@
 <![endif]-->
 
 <!--
-  Image 2 match (ignore pink lines + text):
-  - Main top 20 + photo top 6 = 26px to photo (was 38px — fixed top padding)
-  - Photo 187x163 @ left 25, top 6
-  - Ellipse 47x48 @ 8,1  (overhangs above photo)
-  - Ellipse 53x53 @ 177,100
-  - Ellipse 21x20 @ 156,149 (flush to photo bottom, tucked to large orb)
+  Image 2 match — ignore pink lines/text
+  Fix: inner PEM photo was showing headroom (object-position:center top).
+  Now crop fills the squircle like image 2 (head near top edge).
 -->
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" bgcolor="#EB7231" style="width:640px; max-width:640px; margin:0 auto; border-collapse:collapse; background-color:#EB7231;">
   <tr>
@@ -32,7 +29,7 @@
             <!--[if gte mso 9]>
             <v:group xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" coordsize="237,181" coordorigin="0,0" style="width:237px; height:181px;">
               <v:roundrect style="position:absolute; left:25; top:6; width:187; height:163; z-index:1;" arcsize="4800f" stroked="false" filled="true">
-                <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#EB7231" />
+                <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#EB7231" aspect="atleast" origin="0,0.12" position="0.5,0.28" />
               </v:roundrect>
               <v:image src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" style="position:absolute; left:8; top:1; width:47px; height:48px; z-index:3;" />
               <v:image src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" style="position:absolute; left:177; top:100; width:53px; height:53px; z-index:3;" />
@@ -42,15 +39,15 @@
 
             <!--[if !mso]><!-->
 
-            <!-- Photo in-flow: top 6 / left 25 / right 25 / bottom 12 -->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" height="181" style="width:237px; height:181px; border-collapse:collapse;">
               <tr>
                 <td colspan="3" height="6" style="height:6px; font-size:0; line-height:0;">&nbsp;</td>
               </tr>
               <tr>
                 <td width="25" height="163" style="width:25px; height:163px; font-size:0; line-height:0;">&nbsp;</td>
-                <td width="187" height="163" style="width:187px; height:163px; font-size:0; line-height:0;">
-                  <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="187" height="163" border="0" style="display:block; width:187px; height:163px; border:0; border-radius:78px; object-fit:cover; object-position:center top;" />
+                <!-- overflow+radius clips photo flush to squircle (no inner gap) -->
+                <td width="187" height="163" style="width:187px; height:163px; font-size:0; line-height:0; overflow:hidden; border-radius:72px;">
+                  <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="187" height="163" border="0" style="display:block; width:187px; height:163px; border:0; border-radius:72px; object-fit:cover; object-position:center 28%;" />
                 </td>
                 <td width="25" height="163" style="width:25px; height:163px; font-size:0; line-height:0;">&nbsp;</td>
               </tr>
@@ -59,7 +56,6 @@
               </tr>
             </table>
 
-            <!-- Ellipse 1: 47x48 -->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="47" height="48" style="position:absolute; left:8px; top:1px; width:47px; height:48px; border-collapse:collapse; z-index:3;">
               <tr>
                 <td style="font-size:0; line-height:0;">
@@ -68,7 +64,6 @@
               </tr>
             </table>
 
-            <!-- Ellipse 2: 53x53 -->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="53" height="53" style="position:absolute; left:177px; top:100px; width:53px; height:53px; border-collapse:collapse; z-index:3;">
               <tr>
                 <td style="font-size:0; line-height:0;">
@@ -77,7 +72,6 @@
               </tr>
             </table>
 
-            <!-- Ellipse 3: 21x20 — flush to photo bottom, tucked to large orb -->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="21" height="20" style="position:absolute; left:156px; top:149px; width:21px; height:20px; border-collapse:collapse; z-index:3;">
               <tr>
                 <td style="font-size:0; line-height:0;">
