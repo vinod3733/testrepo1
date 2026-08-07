@@ -1,8 +1,5 @@
 %%[
-  /* ============================================================
-     PEM "Meet" Banner — SFMC AMPscript
-     Set @PEM_Photo and @PEM_FirstName from your DE / lookup.
-     ============================================================ */
+  /* PEM "Meet" Banner — SFMC AMPscript */
   SET @PEM_Photo = AttributeValue("PEM_Photo")
   SET @PEM_FirstName = ProperCase(AttributeValue("PEM_FirstName"))
   IF Empty(@PEM_FirstName) THEN
@@ -12,23 +9,6 @@
     SET @PEM_FirstName = "Friend"
   ENDIF
 ]%%
-<!--
-  PEM Meet Banner Module
-  Main table: 640px | padding: 29px 36px 0 35px | bg #EB7231
-  Inner table: 569px x 167px | 1 row | 2 columns
-
-  DYNAMIC (only):
-    - PEM headshot  → %%=v(@PEM_Photo)=%%
-    - PEM first name → %%=v(@PEM_FirstName)=%%
-
-  STATIC:
-    - 3 ellipse images
-    - magenta corner brackets
-    - magenta name accent bars
-
-  Upload files in emails/assets/pem-banner/ to SFMC Content Builder
-  and replace ASSET_BASE URLs below with your hosted Image Library URLs.
--->
 <!--[if mso]>
 <style type="text/css">
   table { border-collapse: collapse; }
@@ -82,11 +62,10 @@
     }
     .pem-col-text { padding: 16px 0 8px 0 !important; }
     .pem-photo-stack { margin: 0 auto !important; }
-    .pem-name-row { margin: 0 auto !important; }
   }
 </style>
 
-<!-- ===================== MAIN TABLE 640px ===================== -->
+<!-- MAIN TABLE 640px -->
 <table role="presentation" class="pem-meet-wrap" cellspacing="0" cellpadding="0" border="0" width="640" align="center" bgcolor="#EB7231" style="width:640px; max-width:640px; margin:0 auto; border-collapse:collapse; background-color:#EB7231; mso-table-lspace:0pt; mso-table-rspace:0pt;">
   <tr>
     <td align="left" valign="top" bgcolor="#EB7231" style="padding:29px 36px 0 35px; background-color:#EB7231;">
@@ -95,11 +74,11 @@
       <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="569" align="left"><tr><td width="569" valign="middle">
       <![endif]-->
 
-      <!-- ===================== INNER TABLE 569 x 167 ===================== -->
+      <!-- INNER TABLE 569 x 167 | 1 row | 2 columns -->
       <table role="presentation" class="pem-inner" cellspacing="0" cellpadding="0" border="0" width="569" height="167" bgcolor="#EB7231" style="width:569px; max-width:569px; height:167px; border-collapse:collapse; background-color:#EB7231; mso-table-lspace:0pt; mso-table-rspace:0pt;">
         <tr>
 
-          <!-- ========== COLUMN 1: Photo + static ellipses / corners ========== -->
+          <!-- COLUMN 1: Dynamic photo + static ellipses / corners -->
           <td class="pem-col pem-col-photo" width="210" height="167" valign="middle" align="left" bgcolor="#EB7231" style="width:210px; height:167px; vertical-align:middle; background-color:#EB7231; font-size:0; line-height:0;">
 
             <!--[if (gte mso 9)|(IE)]>
@@ -110,26 +89,13 @@
                     <img src="assets/pem-banner/ellipse-large.png" width="72" height="72" alt="" border="0" style="display:block; border:0;" />
                   </td>
                   <td width="184" valign="middle" align="center" style="font-size:0; line-height:0;">
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="184">
-                      <tr>
-                        <td width="28" height="4" style="font-size:0; line-height:0; border-top:4px solid #E8409A; border-left:4px solid #E8409A;">&nbsp;</td>
-                        <td width="128" height="4" style="font-size:0; line-height:0;">&nbsp;</td>
-                        <td width="28" height="4" style="font-size:0; line-height:0; border-top:4px solid #E8409A; border-right:4px solid #E8409A;">&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3" align="center" style="font-size:0; line-height:0; padding:2px 0;">
-                          <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" height="163" width="184" border="0" style="display:block; border:0; height:163px; width:184px;" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td width="28" height="4" style="font-size:0; line-height:0; border-bottom:4px solid #E8409A; border-left:4px solid #E8409A;">&nbsp;</td>
-                        <td width="128" height="4" style="font-size:0; line-height:0;" align="right">
-                          <img src="assets/pem-banner/ellipse-small.png" width="22" height="22" alt="" border="0" style="display:inline-block; border:0;" />
-                          <img src="assets/pem-banner/ellipse-medium.png" width="40" height="40" alt="" border="0" style="display:inline-block; border:0;" />
-                        </td>
-                        <td width="28" height="4" style="font-size:0; line-height:0; border-bottom:4px solid #E8409A; border-right:4px solid #E8409A;">&nbsp;</td>
-                      </tr>
-                    </table>
+                    <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" height="163" width="184" border="0" style="display:block; border:0; height:163px; width:184px;" />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" align="right" style="font-size:0; line-height:0; padding-top:4px;">
+                    <img src="assets/pem-banner/ellipse-small.png" width="22" height="22" alt="" border="0" style="display:inline-block; border:0;" />
+                    <img src="assets/pem-banner/ellipse-medium.png" width="40" height="40" alt="" border="0" style="display:inline-block; border:0;" />
                   </td>
                 </tr>
               </table>
@@ -156,45 +122,26 @@
 
           </td>
 
-          <!-- ========== COLUMN 2: Meet + PEM First Name ========== -->
+          <!-- COLUMN 2: Meet + PEM First Name (NO pink bars) -->
           <td class="pem-col pem-col-text" width="359" height="167" valign="middle" align="left" bgcolor="#EB7231" style="width:359px; height:167px; vertical-align:middle; background-color:#EB7231; padding:0 0 0 24px;">
 
             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-              <!-- Meet -->
               <tr>
-                <td align="left" style="padding:0 0 8px 10px; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:18px; font-weight:400; color:#F5EFE8; mso-line-height-rule:exactly;">
+                <td align="left" style="padding:0 0 8px 0; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:18px; font-weight:400; color:#F5EFE8; mso-line-height-rule:exactly;">
                   Meet
                 </td>
               </tr>
-              <!-- PEM First Name with magenta accent bars (visual bars — NOT [ ] characters) -->
               <tr>
-                <td align="left" style="padding:0;">
-                  <table role="presentation" class="pem-name-row" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                    <tr>
-                      <!-- Left magenta bar -->
-                      <td width="4" valign="middle" bgcolor="#E8409A" style="width:4px; background-color:#E8409A; font-size:0; line-height:0;">
-                        <img src="assets/pem-banner/name-bar.png" width="4" height="36" alt="" border="0" style="display:block; border:0; width:4px; height:36px;" />
-                      </td>
-                      <!-- Name (dynamic — no brackets) -->
-                      <td valign="middle" align="left" style="padding:0 10px; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:36px; font-weight:700; color:#F5EFE8; mso-line-height-rule:exactly; white-space:nowrap;">
-                        %%=v(@PEM_FirstName)=%%
-                      </td>
-                      <!-- Right magenta bar -->
-                      <td width="4" valign="middle" bgcolor="#E8409A" style="width:4px; background-color:#E8409A; font-size:0; line-height:0;">
-                        <img src="assets/pem-banner/name-bar.png" width="4" height="36" alt="" border="0" style="display:block; border:0; width:4px; height:36px;" />
-                      </td>
-                    </tr>
-                  </table>
+                <td align="left" style="padding:0; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:36px; font-weight:700; color:#F5EFE8; mso-line-height-rule:exactly; white-space:nowrap;">
+                  %%=v(@PEM_FirstName)=%%
                 </td>
               </tr>
             </table>
 
           </td>
-          <!-- /COLUMN 2 -->
 
         </tr>
       </table>
-      <!-- /INNER TABLE -->
 
       <!--[if (gte mso 9)|(IE)]>
       </td></tr></table>
@@ -203,4 +150,3 @@
     </td>
   </tr>
 </table>
-<!-- /MAIN TABLE -->
