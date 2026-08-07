@@ -1,0 +1,87 @@
+%%[
+  /* PEM "Meet" Banner — SFMC AMPscript */
+  SET @PEM_Photo = AttributeValue("PEM_Photo")
+  SET @PEM_FirstName = ProperCase(AttributeValue("PEM_FirstName"))
+  IF Empty(@PEM_FirstName) THEN
+    SET @PEM_FirstName = AttributeValue("FirstName")
+  ENDIF
+  IF Empty(@PEM_FirstName) THEN
+    SET @PEM_FirstName = "Friend"
+  ENDIF
+]%%
+<!--[if mso]>
+<style type="text/css">
+  table { border-collapse: collapse; }
+  td, th, div, p, span, a { font-family: Arial, Helvetica, sans-serif !important; }
+</style>
+<![endif]-->
+<style type="text/css">
+  .pem-meet-wrap { width: 100% !important; max-width: 640px !important; }
+  .pem-inner { width: 100% !important; max-width: 569px !important; }
+  @media only screen and (max-width: 640px) {
+    .pem-meet-wrap,
+    .pem-inner { width: 100% !important; max-width: 100% !important; height: auto !important; }
+    .pem-col-photo,
+    .pem-col-text {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      text-align: center !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .pem-col-text { padding-top: 16px !important; padding-bottom: 8px !important; }
+    .pem-photo-img { margin: 0 auto !important; }
+  }
+</style>
+
+<!-- ========== MAIN TABLE: 640px | padding 29px 36px 0 35px | bg #EB7231 ========== -->
+<table role="presentation" class="pem-meet-wrap" cellspacing="0" cellpadding="0" border="0" width="640" align="center" bgcolor="#EB7231" style="width:640px; max-width:640px; margin:0 auto; border-collapse:collapse; background-color:#EB7231; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+  <tr>
+    <td align="left" valign="top" bgcolor="#EB7231" style="padding:29px 36px 0 35px; background-color:#EB7231;">
+
+      <!--[if (gte mso 9)|(IE)]>
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="569" align="left"><tr><td width="569" valign="middle">
+      <![endif]-->
+
+      <!-- ========== INNER TABLE: 569 x 167 | 1 row | 2 columns ========== -->
+      <table role="presentation" class="pem-inner" cellspacing="0" cellpadding="0" border="0" width="569" height="167" bgcolor="#EB7231" style="width:569px; max-width:569px; height:167px; border-collapse:collapse; background-color:#EB7231; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+        <tr>
+
+          <!-- COL 1: Dynamic PEM photo only (184 x 163) -->
+          <td class="pem-col-photo" width="184" height="167" valign="middle" align="left" bgcolor="#EB7231" style="width:184px; height:167px; vertical-align:middle; background-color:#EB7231; font-size:0; line-height:0;">
+            <img class="pem-photo-img" src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="display:block; border:0; outline:none; text-decoration:none; width:184px; height:163px; -ms-interpolation-mode:bicubic;" />
+          </td>
+
+          <!-- Spacer between columns -->
+          <td width="24" height="167" bgcolor="#EB7231" style="width:24px; height:167px; font-size:0; line-height:0; background-color:#EB7231;">&nbsp;</td>
+
+          <!-- COL 2: Meet + PEM First Name -->
+          <td class="pem-col-text" width="361" height="167" valign="middle" align="left" bgcolor="#EB7231" style="width:361px; height:167px; vertical-align:middle; background-color:#EB7231;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+              <tr>
+                <td align="left" style="padding:0 0 10px 0; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:30px; font-weight:400; color:#F5EFE8; mso-line-height-rule:exactly;">
+                  Meet
+                </td>
+              </tr>
+              <tr>
+                <td align="left" style="padding:0; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:36px; font-weight:700; color:#F5EFE8; mso-line-height-rule:exactly;">
+                  %%=v(@PEM_FirstName)=%%
+                </td>
+              </tr>
+            </table>
+          </td>
+
+        </tr>
+      </table>
+      <!-- /INNER -->
+
+      <!--[if (gte mso 9)|(IE)]>
+      </td></tr></table>
+      <![endif]-->
+
+    </td>
+  </tr>
+</table>
+<!-- /MAIN -->
