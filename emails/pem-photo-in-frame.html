@@ -1,15 +1,12 @@
 %%[
   SET @PEM_Photo = AttributeValue("PEM_Photo")
-]%%
-<!--
-  IMPORTANT:
-  Your JPG URL cannot work as an overlay (JPG has NO transparency).
-  1) Upload this file to SFMC Image Library:
-     emails/assets/pem-banner/pem-frame-transparent-224x167.png
-  2) Put that NEW .png URL in @PEM_Frame below.
--->
-%%[
-  SET @PEM_Frame = "PASTE_TRANSPARENT_PNG_URL_FROM_SFMC_HERE"
+  /*
+    YOUR JPG CANNOT WORK — it has a solid blue center (no transparency).
+    Upload this file to SFMC Content Builder → Image Library:
+      emails/assets/pem-banner/pem-frame-transparent-224x167.png
+    Then paste the hosted .png URL below:
+  */
+  SET @PEM_Frame = "PASTE_TRANSPARENT_PNG_URL_HERE"
 ]%%
 <!--[if mso]>
 <xml>
@@ -31,25 +28,23 @@
         <tr>
           <td width="224" height="167" valign="top" bgcolor="#EB7231" style="width:224px; height:167px; background-color:#EB7231; font-size:0; line-height:0;">
 
+            <!-- OUTLOOK: photo behind, transparent frame on top -->
             <!--[if gte mso 9]>
-            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:224px; height:167px;">
-              <v:fill type="frame" src="%%=v(@PEM_Frame)=%%" color="#EB7231" />
-              <v:textbox inset="20px,2px,20px,2px">
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="184" height="163">
-                  <tr>
-                    <td width="184" height="163" align="center" valign="middle" style="font-size:0; line-height:0;">
-                      <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="display:block; width:184px; height:163px; border:0;" />
-                    </td>
-                  </tr>
-                </table>
-              </v:textbox>
-            </v:rect>
+            <v:group xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" coordsize="224,167" coordorigin="0,0" style="width:224px; height:167px;">
+              <v:image src="%%=v(@PEM_Photo)=%%" style="width:184px; height:163px; top:2px; left:20px; z-index:1;" />
+              <v:image src="%%=v(@PEM_Frame)=%%" style="width:224px; height:167px; top:0; left:0; z-index:2;" />
+            </v:group>
             <![endif]-->
 
+            <!-- GMAIL / APPLE / YAHOO / ANDROID: photo as bg, frame img on top -->
             <!--[if !mso]><!-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167" style="width:224px; height:167px; border-collapse:collapse;">
               <tr>
-                <td width="224" height="167" valign="middle" align="center" background="%%=v(@PEM_Photo)=%%" style="width:224px; height:167px; background-image:url('%%=v(@PEM_Photo)=%%'); background-repeat:no-repeat; background-position:center center; background-size:184px 163px; font-size:0; line-height:0;">
+                <td width="224" height="167" valign="middle" align="center" background="%%=v(@PEM_Photo)=%%" bgcolor="#EB7231" style="width:224px; height:167px; background-color:#EB7231; background-image:url('%%=v(@PEM_Photo)=%%'); background-repeat:no-repeat; background-position:center center; background-size:184px 163px; font-size:0; line-height:0;">
+                  <!-- also keep required img for tracking / fallback -->
+                  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
+                    <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="display:block;" />
+                  </div>
                   <img src="%%=v(@PEM_Frame)=%%" alt="" width="224" height="167" border="0" style="display:block; width:224px; height:167px; border:0;" />
                 </td>
               </tr>
