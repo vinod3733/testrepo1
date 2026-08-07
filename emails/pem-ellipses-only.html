@@ -1,5 +1,12 @@
 %%[
   SET @PEM_Photo = AttributeValue("PEM_Photo")
+  SET @PEM_FirstName = ProperCase(AttributeValue("PEM_FirstName"))
+  IF Empty(@PEM_FirstName) THEN
+    SET @PEM_FirstName = ProperCase(AttributeValue("FirstName"))
+  ENDIF
+  IF Empty(@PEM_FirstName) THEN
+    SET @PEM_FirstName = "Friend"
+  ENDIF
 ]%%
 <!--[if mso]>
 <xml>
@@ -13,54 +20,49 @@
 </style>
 <![endif]-->
 
+<!--
+  Target = image 2
+  - NO pink L-corner lines on photo
+  - PEM photo 187x163 rounded (squircle), not small circle
+  - 3 ellipses on top
+  - Meet + First Name on the right
+  - table/tr/td only (no div)
+-->
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" bgcolor="#EB7231" style="width:640px; max-width:640px; margin:0 auto; border-collapse:collapse; background-color:#EB7231;">
   <tr>
-    <td align="left" valign="top" bgcolor="#EB7231" style="padding:29px 376px 0 27px; background-color:#EB7231;">
+    <td align="left" valign="middle" bgcolor="#EB7231" style="padding:29px 36px 0 27px; background-color:#EB7231;">
 
-      <!-- Stage 237 x 181 — NO div tags -->
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" height="181" bgcolor="#EB7231" style="width:237px; height:181px; border-collapse:collapse; background-color:#EB7231;">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="577" bgcolor="#EB7231" style="width:577px; border-collapse:collapse; background-color:#EB7231;">
         <tr>
+
+          <!-- ========== LEFT: photo + ellipses (237 x 181) ========== -->
           <td width="237" height="181" valign="top" bgcolor="#EB7231" style="position:relative; width:237px; height:181px; background-color:#EB7231; font-size:0; line-height:0;">
 
-            <!-- OUTLOOK (VML — no div) -->
+            <!-- OUTLOOK -->
             <!--[if gte mso 9]>
             <v:group xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" coordsize="237,181" coordorigin="0,0" style="width:237px; height:181px;">
-              <v:roundrect style="position:absolute; left:49; top:21; width:140; height:140; z-index:1;" arcsize="5000f" stroked="false" filled="true">
+              <!-- Photo 187x163 centered (left 25, top 9) — NO pink lines -->
+              <v:roundrect style="position:absolute; left:25; top:9; width:187; height:163; z-index:1;" arcsize="4800f" stroked="false" filled="true">
                 <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#EB7231" />
               </v:roundrect>
-              <v:line from="49,21" to="79,21" strokecolor="#E8409A" strokeweight="3px" style="z-index:2;" />
-              <v:line from="49,21" to="49,51" strokecolor="#E8409A" strokeweight="3px" style="z-index:2;" />
-              <v:line from="159,161" to="189,161" strokecolor="#E8409A" strokeweight="3px" style="z-index:2;" />
-              <v:line from="189,131" to="189,161" strokecolor="#E8409A" strokeweight="3px" style="z-index:2;" />
+              <!-- Ellipse 1 -->
               <v:image src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" style="position:absolute; left:8; top:6; width:47px; height:48px; z-index:3;" />
+              <!-- Ellipse 2 -->
               <v:image src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" style="position:absolute; left:177; top:103; width:53px; height:53px; z-index:3;" />
+              <!-- Ellipse 3 -->
               <v:image src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" style="position:absolute; left:154; top:146; width:21px; height:20px; z-index:3;" />
             </v:group>
             <![endif]-->
 
-            <!-- GMAIL / APPLE / YAHOO / ANDROID — table + img only (no div) -->
+            <!-- GMAIL / APPLE / YAHOO / ANDROID — no div, no pink lines -->
             <!--[if !mso]><!-->
 
-            <!-- PEM photo 140x140 -->
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="140" height="140" style="position:absolute; left:49px; top:21px; width:140px; height:140px; border-collapse:collapse; z-index:1;">
+            <!-- PEM photo 187x163 -->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="187" height="163" style="position:absolute; left:25px; top:9px; width:187px; height:163px; border-collapse:collapse; z-index:1;">
               <tr>
-                <td align="center" valign="middle" width="140" height="140" style="width:140px; height:140px; font-size:0; line-height:0;">
-                  <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="140" height="140" border="0" style="display:block; width:140px; height:140px; border:0; border-radius:70px; object-fit:cover;" />
+                <td align="center" valign="middle" width="187" height="163" style="width:187px; height:163px; font-size:0; line-height:0;">
+                  <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="187" height="163" border="0" style="display:block; width:187px; height:163px; border:0; border-radius:78px; object-fit:cover; object-position:center center;" />
                 </td>
-              </tr>
-            </table>
-
-            <!-- Magenta bracket top-left -->
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="28" height="28" style="position:absolute; left:49px; top:21px; width:28px; height:28px; border-collapse:collapse; z-index:2;">
-              <tr>
-                <td width="28" height="28" style="width:28px; height:28px; border-top:3px solid #E8409A; border-left:3px solid #E8409A; font-size:0; line-height:0; box-sizing:border-box;">&nbsp;</td>
-              </tr>
-            </table>
-
-            <!-- Magenta bracket bottom-right -->
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="28" height="28" style="position:absolute; left:161px; top:133px; width:28px; height:28px; border-collapse:collapse; z-index:2;">
-              <tr>
-                <td width="28" height="28" style="width:28px; height:28px; border-bottom:3px solid #E8409A; border-right:3px solid #E8409A; font-size:0; line-height:0; box-sizing:border-box;">&nbsp;</td>
               </tr>
             </table>
 
@@ -94,6 +96,34 @@
             <!--<![endif]-->
 
           </td>
+
+          <!-- spacer between photo and text -->
+          <td width="24" bgcolor="#EB7231" style="width:24px; font-size:0; line-height:0; background-color:#EB7231;">&nbsp;</td>
+
+          <!-- ========== RIGHT: Meet + First Name ========== -->
+          <td width="316" valign="middle" align="left" bgcolor="#EB7231" style="width:316px; background-color:#EB7231;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+              <tr>
+                <td align="left" style="padding:0 0 10px 0; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:30px; font-weight:400; color:#F5EFE8; mso-line-height-rule:exactly;">
+                  Meet
+                </td>
+              </tr>
+              <tr>
+                <td align="left" style="padding:0;">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                    <tr>
+                      <td width="4" valign="middle" bgcolor="#E8409A" style="width:4px; height:36px; background-color:#E8409A; font-size:0; line-height:0;">&nbsp;</td>
+                      <td valign="middle" align="left" style="padding:0 10px; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:36px; font-weight:700; color:#F5EFE8; mso-line-height-rule:exactly; white-space:nowrap;">
+                        %%=v(@PEM_FirstName)=%%
+                      </td>
+                      <td width="4" valign="middle" bgcolor="#E8409A" style="width:4px; height:36px; background-color:#E8409A; font-size:0; line-height:0;">&nbsp;</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+
         </tr>
       </table>
 
