@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-apple-disable-message-reformatting">
+  <title>Desktop + Mobile Table Blocks — SFMC</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style type="text/css">
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; }
+    body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+    /* Desktop: show desktop rows, hide mobile rows */
+    .desktop-only { display: table-row !important; }
+    .mobile-only { display: none !important; max-height: 0 !important; overflow: hidden !important; mso-hide: all; }
+
+    @media screen and (max-width: 600px) {
+      .email-container { width: 100% !important; max-width: 100% !important; }
+      .fluid { width: 100% !important; max-width: 100% !important; height: auto !important; }
+      .desktop-only { display: none !important; max-height: 0 !important; overflow: hidden !important; }
+      .mobile-only {
+        display: table-row !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+      .mobile-padding { padding-left: 20px !important; padding-right: 20px !important; }
+      .h1-mobile { font-size: 26px !important; line-height: 32px !important; }
+      .body-mobile { font-size: 16px !important; line-height: 24px !important; }
+      .button-a { display: block !important; width: 100% !important; text-align: center !important; box-sizing: border-box !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f0f2f4; font-family:Arial, Helvetica, sans-serif;">
+  <div style="display:none; font-size:1px; color:#f0f2f4; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">
+    Example of separate desktop and mobile &lt;tr&gt; blocks for SFMC.
+  </div>
+
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#f0f2f4;">
+    <tr>
+      <td align="center" valign="top" style="padding:24px 12px;">
+
+        <!--[if mso]>
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center"><tr><td>
+        <![endif]-->
+
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width:600px; margin:0 auto; background-color:#ffffff;">
+
+          <!-- Shared header (both viewports) -->
+          <tr>
+            <td align="center" style="padding:24px 32px; background-color:#ffffff;" class="mobile-padding">
+              <img src="https://via.placeholder.com/180x48/1a5f4a/ffffff?text=YOUR+BRAND" width="180" height="48" alt="Your Brand" style="width:180px; max-width:180px; height:auto;">
+            </td>
+          </tr>
+
+          <!-- ========== DESKTOP VERSION (hidden on mobile) ========== -->
+          <tr class="desktop-only">
+            <td align="left" style="padding:8px 32px 32px 32px; background-color:#ffffff;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td width="280" valign="top" style="padding-right:16px;">
+                    <img src="https://via.placeholder.com/280x200/1a5f4a/ffffff?text=Desktop+Image" width="280" alt="Desktop" border="0" style="width:280px; max-width:280px; height:auto; display:block;">
+                  </td>
+                  <td width="256" valign="middle" style="padding-left:8px;">
+                    <h1 style="margin:0 0 12px 0; font-family:Georgia, 'Times New Roman', serif; font-size:28px; line-height:34px; color:#1a2b33;">
+                      Desktop layout
+                    </h1>
+                    <p style="margin:0 0 16px 0; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:22px; color:#3d4f5a;">
+                      This entire <strong>&lt;tr&gt;</strong> is the desktop version: image and copy sit in side-by-side <strong>&lt;td&gt;</strong> cells.
+                    </p>
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="border-radius:4px; background:#1a5f4a;">
+                          <a href="https://www.example.com" target="_blank" style="background:#1a5f4a; border:1px solid #1a5f4a; font-family:Arial, Helvetica, sans-serif; font-size:15px; text-decoration:none; padding:12px 24px; color:#ffffff; display:inline-block; border-radius:4px; font-weight:bold;">
+                            Desktop CTA
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ========== MOBILE VERSION (hidden on desktop) ========== -->
+          <!--[if !mso]><!-->
+          <tr class="mobile-only" style="display:none; max-height:0; overflow:hidden;">
+            <td align="left" style="padding:8px 20px 28px 20px; background-color:#ffffff;" class="mobile-padding">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td align="center" style="padding:0 0 16px 0;">
+                    <img src="https://via.placeholder.com/560x280/2d7a62/ffffff?text=Mobile+Image" width="560" alt="Mobile" border="0" class="fluid" style="width:100%; max-width:560px; height:auto; display:block;">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left">
+                    <h1 class="h1-mobile" style="margin:0 0 12px 0; font-family:Georgia, 'Times New Roman', serif; font-size:26px; line-height:32px; color:#1a2b33;">
+                      Mobile layout
+                    </h1>
+                    <p class="body-mobile" style="margin:0 0 16px 0; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:24px; color:#3d4f5a;">
+                      This entire <strong>&lt;tr&gt;</strong> is the mobile version: one stacked column of <strong>&lt;td&gt;</strong> cells (image, then copy, then button).
+                    </p>
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="border-radius:4px; background:#1a5f4a;" align="center">
+                          <a class="button-a" href="https://www.example.com" target="_blank" style="background:#1a5f4a; border:1px solid #1a5f4a; font-family:Arial, Helvetica, sans-serif; font-size:16px; text-decoration:none; padding:14px 24px; color:#ffffff; display:block; border-radius:4px; font-weight:bold; text-align:center;">
+                            Mobile CTA
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!--<![endif]-->
+
+          <!-- Shared footer -->
+          <tr>
+            <td align="center" style="padding:20px 32px 28px 32px; border-top:1px solid #e2e6e9; background-color:#ffffff;" class="mobile-padding">
+              <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:18px; color:#5a6a75;">
+                %%Member_Busname%% · %%Member_Addr%% · %%Member_City%%, %%Member_State%% %%Member_PostalCode%%<br>
+                <a href="%%profile_center_url%%" style="color:#5a6a75;">Update preferences</a>
+                &nbsp;|&nbsp;
+                <a href="%%unsub_center_url%%" style="color:#5a6a75;">Unsubscribe</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+        <!--[if mso]>
+        </td></tr></table>
+        <![endif]-->
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
