@@ -7,13 +7,7 @@
   IF Empty(@PEM_FirstName) THEN
     SET @PEM_FirstName = "Friend"
   ENDIF
-  /*
-    REQUIRED FOR OUTLOOK:
-    Upload emails/assets/pem-banner/pem-outlook-mask-237x181.png
-    to SFMC Content Builder (image.ps.alexion.com) and paste that URL below.
-    GitHub raw is only a temporary test URL.
-  */
-  SET @PEM_Mask = "https://raw.githubusercontent.com/vinod3733/testrepo1/cursor/sfmc-responsive-email-acf8/emails/assets/pem-banner/pem-outlook-mask-237x181.png"
+  SET @Ellipse = "https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png"
 ]%%
 <!--[if mso]>
 <xml>
@@ -32,42 +26,49 @@
 </style>
 <![endif]-->
 
-<!--
-  Image 2 look — Outlook-safe (OL365 DPI 120 included)
-  Layer 1 = PEM photo fill
-  Layer 2 = ONE mask PNG (orange + transparent squircle + 3 orbs)
-  Removed: absolute orbs, v:group, 4px magenta name cells (pink/white artifacts)
--->
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" bgcolor="#EB7231" style="width:640px; max-width:640px; margin:0 auto; border-collapse:collapse; background-color:#EB7231; mso-table-lspace:0pt; mso-table-rspace:0pt;">
   <tr>
     <td align="left" valign="middle" bgcolor="#EB7231" style="padding:24px 36px 24px 27px; background-color:#EB7231;">
-
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="577" bgcolor="#EB7231" style="width:577px; border-collapse:collapse; background-color:#EB7231; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="577" bgcolor="#EB7231" style="width:577px; border-collapse:collapse; background-color:#EB7231;">
         <tr>
 
-          <!-- PHOTO + ORBS -->
           <td width="237" height="181" valign="top" bgcolor="#EB7231" style="width:237px; height:181px; background-color:#EB7231; font-size:0; line-height:0;">
 
             <!--[if gte mso 9]>
-            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" fill="true" stroke="false" style="width:177.75pt; height:135.75pt;">
-              <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#EB7231" />
-              <v:textbox inset="0,0,0,0" style="mso-fit-shape-to-text:true;">
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" height="181" style="width:237px; height:181px; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                  <tr>
-                    <td width="237" height="181" style="width:237px; height:181px; font-size:0; line-height:0;">
-                      <img src="%%=v(@PEM_Mask)=%%" width="237" height="181" border="0" alt="" style="display:block; width:237px; height:181px; border:0;" />
-                    </td>
-                  </tr>
-                </table>
-              </v:textbox>
-            </v:rect>
+            <v:group xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"
+              coordorigin="0,0" coordsize="2370,1810"
+              style="width:177.75pt; height:135.75pt;">
+              <v:rect fill="true" stroke="false" style="position:absolute; left:0; top:0; width:2370; height:1810;">
+                <v:fill color="#EB7231" />
+              </v:rect>
+              <v:roundrect fill="true" stroke="false" arcsize="0.45"
+                style="position:absolute; left:250; top:100; width:1870; height:1550;">
+                <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#EB7231" />
+              </v:roundrect>
+              <v:image src="%%=v(@Ellipse)=%%" style="position:absolute; left:80; top:40; width:470; height:480;" />
+              <v:image src="%%=v(@Ellipse)=%%" style="position:absolute; left:1750; top:1050; width:530; height:530;" />
+              <v:image src="%%=v(@Ellipse)=%%" style="position:absolute; left:1540; top:1450; width:210; height:200;" />
+            </v:group>
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" height="181"><tr><td width="237" height="181" style="font-size:0; line-height:0;">&nbsp;</td></tr></table>
             <![endif]-->
 
             <!--[if !mso]><!-->
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" height="181" bgcolor="#EB7231" background="%%=v(@PEM_Photo)=%%" style="width:237px; height:181px; border-collapse:collapse; background-color:#EB7231; background-image:url('%%=v(@PEM_Photo)=%%'); background-repeat:no-repeat; background-position:center center; background-size:cover;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" height="181" style="width:237px; height:181px; position:relative; border-collapse:collapse;">
               <tr>
-                <td width="237" height="181" style="width:237px; height:181px; font-size:0; line-height:0;">
-                  <img src="%%=v(@PEM_Mask)=%%" width="237" height="181" border="0" alt="" style="display:block; width:237px; height:181px; border:0;" />
+                <td width="237" height="181" valign="top" style="position:relative; width:237px; height:181px; font-size:0; line-height:0;">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" style="width:237px; border-collapse:collapse;">
+                    <tr><td height="10" colspan="3" style="height:10px; font-size:0; line-height:0;">&nbsp;</td></tr>
+                    <tr>
+                      <td width="25" style="width:25px; font-size:0;">&nbsp;</td>
+                      <td width="187" height="155" style="width:187px; height:155px; font-size:0; line-height:0;">
+                        <img src="%%=v(@PEM_Photo)=%%" alt="" width="187" height="155" border="0" style="display:block; width:187px; height:155px; border:0; border-radius:70px; object-fit:cover; object-position:center 28%;" />
+                      </td>
+                      <td width="25" style="width:25px; font-size:0;">&nbsp;</td>
+                    </tr>
+                  </table>
+                  <img src="%%=v(@Ellipse)=%%" width="47" height="48" alt="" border="0" style="position:absolute; left:8px; top:4px; display:block; border:0; z-index:3;" />
+                  <img src="%%=v(@Ellipse)=%%" width="53" height="53" alt="" border="0" style="position:absolute; left:175px; top:105px; display:block; border:0; z-index:3;" />
+                  <img src="%%=v(@Ellipse)=%%" width="21" height="20" alt="" border="0" style="position:absolute; left:154px; top:145px; display:block; border:0; z-index:3;" />
                 </td>
               </tr>
             </table>
@@ -77,25 +78,19 @@
 
           <td width="24" bgcolor="#EB7231" style="width:24px; font-size:0; line-height:0;">&nbsp;</td>
 
-          <!-- MEET + NAME — no pink bar cells -->
           <td width="316" valign="middle" bgcolor="#EB7231" style="width:316px; background-color:#EB7231;">
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
               <tr>
-                <td style="padding:0 0 8px 0; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:30px; color:#F5EFE8; mso-line-height-rule:exactly;">
-                  Meet
-                </td>
+                <td style="padding:0 0 8px 0; font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:30px; color:#F5EFE8;">Meet</td>
               </tr>
               <tr>
-                <td style="font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:36px; font-weight:700; color:#F5EFE8; mso-line-height-rule:exactly;">
-                  %%=v(@PEM_FirstName)=%%
-                </td>
+                <td style="font-family:Arial, Helvetica, sans-serif; font-size:30px; line-height:36px; font-weight:700; color:#F5EFE8;">%%=v(@PEM_FirstName)=%%</td>
               </tr>
             </table>
           </td>
 
         </tr>
       </table>
-
     </td>
   </tr>
 </table>
