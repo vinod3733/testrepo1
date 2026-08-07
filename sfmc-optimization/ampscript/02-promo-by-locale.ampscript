@@ -1,0 +1,38 @@
+%%[
+/*==============================================================================
+  Locale-based promo block
+  DE: Promo_Today (PK: Locale) — rebuilt daily by Query Activity
+  Columns: Locale, Headline, Body, CtaLabel, CtaUrl
+==============================================================================*/
+
+VAR @locale, @rows, @row, @headline, @body, @ctaLabel, @ctaUrl
+
+SET @locale = AttributeValue("Locale")
+IF Empty(@locale) THEN
+  SET @locale = "en-US"
+ENDIF
+
+SET @rows = LookupRows("Promo_Today", "Locale", @locale)
+
+IF RowCount(@rows) == 0 AND @locale != "en-US" THEN
+  SET @rows = LookupRows("Promo_Today", "Locale", "en-US")
+ENDIF
+
+IF RowCount(@rows) > 0 THEN
+  SET @row = Row(@rows, 1)
+  SET @headline = Field(@row, "Headline")
+  SET @body = Field(@row, "Body")
+  SET @ctaLabel = Field(@row, "CtaLabel")
+  SET @ctaUrl = Field(@row, "CtaUrl")
+ENDIF
+]%%
+
+%%[ IF NOT Empty(@headline) THEN ]%%
+  <h2 style="margin:0 0 8px 0;">%%=v(@headline)=%%</h2>
+  <p style="margin:0 0 16px 0;">%%=v(@body)=%%</p>
+  <p style="margin:0;">
+    <a href="%%=RedirectTo(@ctaUrl)=%%" style="font-weight:bold;">
+      %%=v(@ctaLabel)=%%
+    </a>
+  </p>
+%%[ ENDIF ]%%
