@@ -1,5 +1,4 @@
 %%[
-  /* Only dynamic field from DE */
   SET @PEM_Photo = AttributeValue("PEM_Photo")
 ]%%
 <!--[if mso]>
@@ -14,57 +13,39 @@
 </xml>
 <![endif]-->
 
-<!--
-  Static frame (client asset): 224x167
-  Dynamic photo from DE:       184x163  → %%=v(@PEM_Photo)=%%
-  Outlook: VML  |  Gmail/Apple/Yahoo: absolute stack
--->
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167" style="width:224px; height:167px; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+<!-- MAIN TABLE — background #EB7231 -->
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" bgcolor="#EB7231" style="width:640px; max-width:640px; margin:0 auto; border-collapse:collapse; background-color:#EB7231; mso-table-lspace:0pt; mso-table-rspace:0pt;">
   <tr>
-    <td align="center" valign="middle" width="224" height="167" style="width:224px; height:167px; font-size:0; line-height:0;">
+    <td align="left" valign="top" bgcolor="#EB7231" style="padding:29px 36px 0 35px; background-color:#EB7231;">
 
-      <!-- ===================== OUTLOOK (Word engine) ===================== -->
-      <!--[if gte mso 9]>
-      <v:group xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" coordsize="224,167" coordorigin="0,0" style="width:224px; height:167px;">
+      <!-- PEM photo + static frame (224 x 167) -->
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167" style="width:224px; height:167px; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+        <tr>
+          <td align="center" valign="middle" width="224" height="167" bgcolor="#EB7231" style="width:224px; height:167px; font-size:0; line-height:0; background-color:#EB7231;">
 
-        <!-- Dynamic PEM photo -->
-        <v:roundrect style="position:absolute; left:20; top:2; width:184; height:163; z-index:1;" arcsize="4200f" stroked="false" filled="true">
-          <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#333333" />
-        </v:roundrect>
+            <!-- OUTLOOK -->
+            <!--[if gte mso 9]>
+            <v:group xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" coordsize="224,167" coordorigin="0,0" style="width:224px; height:167px;">
+              <v:roundrect style="position:absolute; left:20; top:2; width:184; height:163; z-index:1;" arcsize="4200f" stroked="false" filled="true">
+                <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#333333" />
+              </v:roundrect>
+              <v:rect style="position:absolute; left:0; top:0; width:224; height:167; z-index:2;" stroked="false" filled="true">
+                <v:fill type="frame" src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/eb3ad9ba-4b3d-4bbc-a5ad-c2fe989d9806.png" color="#EB7231" />
+              </v:rect>
+            </v:group>
+            <![endif]-->
 
-        <!-- Static frame image on top (hardcoded — NOT from DE) -->
-        <v:rect style="position:absolute; left:0; top:0; width:224; height:167; z-index:2;" stroked="false" filled="true">
-          <v:fill type="frame" src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/eb3ad9ba-4b3d-4bbc-a5ad-c2fe989d9806.png" color="#EB7231" />
-        </v:rect>
+            <!-- GMAIL / APPLE / YAHOO / ANDROID -->
+            <!--[if !mso]><!-->
+            <div style="display:inline-block; position:relative; width:224px; height:167px;">
+              <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="position:absolute; left:20px; top:2px; display:block; width:184px; height:163px; border:0; border-radius:70px; object-fit:cover; z-index:1;" />
+              <img src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/eb3ad9ba-4b3d-4bbc-a5ad-c2fe989d9806.png" alt="" width="224" height="167" border="0" style="position:absolute; left:0; top:0; display:block; width:224px; height:167px; border:0; z-index:2;" />
+            </div>
+            <!--<![endif]-->
 
-      </v:group>
-
-      <!-- Fallback img for Outlook if VML blocked (photo only, centered) -->
-      <div style="display:none; mso-hide:all;">
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="224" height="167">
-          <tr>
-            <td width="20">&nbsp;</td>
-            <td width="184" height="167" valign="middle" align="center">
-              <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="display:block; width:184px; height:163px; border:0;" />
-            </td>
-            <td width="20">&nbsp;</td>
-          </tr>
-        </table>
-      </div>
-      <![endif]-->
-
-      <!-- ===================== GMAIL / APPLE / YAHOO / ANDROID / OUTLOOK.com ===================== -->
-      <!--[if !mso]><!-->
-      <div style="display:inline-block; position:relative; width:224px; height:167px; max-width:224px;">
-
-        <!-- Dynamic photo from DE (behind) -->
-        <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="184" height="163" border="0" style="position:absolute; left:20px; top:2px; display:block; width:184px; height:163px; border:0; border-radius:70px; object-fit:cover; z-index:1;" />
-
-        <!-- Static frame (hardcoded SFMC URL — on top) -->
-        <img src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/eb3ad9ba-4b3d-4bbc-a5ad-c2fe989d9806.png" alt="" width="224" height="167" border="0" style="position:absolute; left:0; top:0; display:block; width:224px; height:167px; border:0; z-index:2;" />
-
-      </div>
-      <!--<![endif]-->
+          </td>
+        </tr>
+      </table>
 
     </td>
   </tr>
