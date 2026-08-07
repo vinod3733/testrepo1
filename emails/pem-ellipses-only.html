@@ -10,34 +10,58 @@
 </xml>
 <style type="text/css">
   table { border-collapse: collapse; }
+  v\:* { behavior: url(#default#VML); display: inline-block; }
+  o\:* { behavior: url(#default#VML); }
+  w\:* { behavior: url(#default#VML); }
+  .shape { behavior: url(#default#VML); }
 </style>
 <![endif]-->
 
-<!--
-  Image 2 match — ignore pink lines/text
-  Fix: inner PEM photo was showing headroom (object-position:center top).
-  Now crop fills the squircle like image 2 (head near top edge).
--->
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" bgcolor="#EB7231" style="width:640px; max-width:640px; margin:0 auto; border-collapse:collapse; background-color:#EB7231;">
   <tr>
     <td align="left" valign="top" bgcolor="#EB7231" style="padding:20px 376px 0 27px; background-color:#EB7231;">
 
+      <!-- ============================================================
+           OUTLOOK DESKTOP — ZERO absolute positioning
+           Photo = normal img (full face, correct size — guaranteed)
+           Ellipses = normal imgs in nested tables (no v:group / no v:fill)
+           This is the only Outlook-safe way; absolute VML was what broke your test.
+           ============================================================ -->
+      <!--[if mso]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" bgcolor="#EB7231" style="width:237px; border-collapse:collapse;">
+
+        <tr>
+          <td width="8" style="width:8px; font-size:0; line-height:0;">&nbsp;</td>
+          <td width="47" valign="top" style="width:47px; font-size:0; line-height:0; padding-top:1px;">
+            <img src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" width="47" height="48" alt="" border="0" style="display:block; width:47px; height:48px; border:0;" />
+          </td>
+          <td width="182" style="width:182px; font-size:0; line-height:0;">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td colspan="3" style="font-size:0; line-height:0; padding-left:25px; padding-top:0;">
+            <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="187" height="163" border="0" style="display:block; width:187px; height:163px; border:0;" />
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3" align="right" valign="top" style="font-size:0; line-height:0; padding-right:7px; padding-top:0;">
+            <img src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" width="21" height="20" alt="" border="0" style="display:inline-block; width:21px; height:20px; border:0; vertical-align:middle;" />
+            <img src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" width="53" height="53" alt="" border="0" style="display:inline-block; width:53px; height:53px; border:0; vertical-align:middle;" />
+          </td>
+        </tr>
+
+      </table>
+      <![endif]-->
+
+      <!-- ============================================================
+           GMAIL / APPLE / YAHOO / ANDROID / SFMC WEB PREVIEW
+           (keeps exact overlapping design — these clients support absolute)
+           ============================================================ -->
+      <!--[if !mso]><!-->
       <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" height="181" bgcolor="#EB7231" style="width:237px; height:181px; border-collapse:collapse; background-color:#EB7231;">
         <tr>
           <td width="237" height="181" valign="top" bgcolor="#EB7231" style="position:relative; width:237px; height:181px; background-color:#EB7231; font-size:0; line-height:0;">
-
-            <!--[if gte mso 9]>
-            <v:group xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" coordsize="237,181" coordorigin="0,0" style="width:237px; height:181px;">
-              <v:roundrect style="position:absolute; left:25; top:6; width:187; height:163; z-index:1;" arcsize="4800f" stroked="false" filled="true">
-                <v:fill type="frame" src="%%=v(@PEM_Photo)=%%" color="#EB7231" aspect="atleast" origin="0,0.12" position="0.5,0.28" />
-              </v:roundrect>
-              <v:image src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" style="position:absolute; left:8; top:1; width:47px; height:48px; z-index:3;" />
-              <v:image src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" style="position:absolute; left:177; top:100; width:53px; height:53px; z-index:3;" />
-              <v:image src="https://image.ps.alexion.com/lib/fe2f11717064057e711376/m/1/7f8a7db5-2d00-4f92-a00a-ca260c3dcbea.png" style="position:absolute; left:156; top:149; width:21px; height:20px; z-index:3;" />
-            </v:group>
-            <![endif]-->
-
-            <!--[if !mso]><!-->
 
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="237" height="181" style="width:237px; height:181px; border-collapse:collapse;">
               <tr>
@@ -45,7 +69,6 @@
               </tr>
               <tr>
                 <td width="25" height="163" style="width:25px; height:163px; font-size:0; line-height:0;">&nbsp;</td>
-                <!-- overflow+radius clips photo flush to squircle (no inner gap) -->
                 <td width="187" height="163" style="width:187px; height:163px; font-size:0; line-height:0; overflow:hidden; border-radius:72px;">
                   <img src="%%=v(@PEM_Photo)=%%" alt="PEM Headshot" width="187" height="163" border="0" style="display:block; width:187px; height:163px; border:0; border-radius:72px; object-fit:cover; object-position:center 28%;" />
                 </td>
@@ -80,11 +103,10 @@
               </tr>
             </table>
 
-            <!--<![endif]-->
-
           </td>
         </tr>
       </table>
+      <!--<![endif]-->
 
     </td>
   </tr>
