@@ -8,8 +8,28 @@ Table-based (`<table>` / `<tr>` / `<td>`) HTML emails optimized for **SFMC**, **
 
 | File | Use when |
 |------|----------|
-| `emails/sfmc-responsive-email.html` | **Default** — one hybrid layout that adapts (600px desktop, stacked mobile) |
-| `emails/sfmc-desktop-and-mobile-blocks.html` | You need **different** desktop vs mobile content/images in separate `<tr>` blocks |
+| `emails/pem-meet-banner.html` | **PEM Meet banner** — 640px main / 569×167 inner, dynamic photo + name, static ellipses |
+| `emails/pem-meet-banner-preview.html` | Local browser preview of the PEM banner (sample data, no AMPscript) |
+| `emails/assets/pem-banner/` | Static ellipse + magenta corner / bar PNGs (upload to SFMC Image Library) |
+| `emails/sfmc-responsive-email.html` | Full hybrid email layout (600px desktop, stacked mobile) |
+| `emails/sfmc-desktop-and-mobile-blocks.html` | Separate desktop-only / mobile-only `<tr>` blocks |
+
+## PEM Meet banner (`pem-meet-banner.html`)
+
+Matches the orange hero module:
+
+| Spec | Value |
+|------|--------|
+| Main table | `640px`, padding `29px 36px 0 35px`, bg `#EB7231` |
+| Inner table | `569px` × `167px`, **1 row / 2 columns** |
+| Col 1 | Dynamic `<img src="%%=v(@PEM_Photo)=%%" … width="184" height="163">` + **3 static ellipses** + magenta corners |
+| Col 2 | `Meet` (30px / 18px) + `%%=v(@PEM_FirstName)=%%` (30px / 36px), color `#F5EFE8` |
+| Name accents | Magenta bars via table cells / images — **no `[ ]` characters** in the name |
+
+1. Upload PNGs from `emails/assets/pem-banner/` to SFMC Content Builder.
+2. In `pem-meet-banner.html`, replace `assets/pem-banner/...` paths with your hosted Image Library URLs.
+3. Paste the module into an HTML Paste email (or Code Block).
+4. Ensure the send audience / DE provides `PEM_Photo` and `PEM_FirstName`.
 
 ## Compatibility built in
 
